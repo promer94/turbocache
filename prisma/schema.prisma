@@ -77,4 +77,5 @@ model TurboToken {
   team Team @relation(fields: [teamId], references: [id])
   userId String @map("user_id")
   user User @relation(fields: [userId], references: [id])
+  @@map("turbotoken")
 }
