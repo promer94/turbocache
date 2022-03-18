@@ -16,7 +16,6 @@ class SupaBaseStorage implements ObjectStorage {
     if (data) {
       return true;
     } else {
-      console.log('error', error)
       throw new Error(error?.message);
     }
   }
@@ -25,7 +24,7 @@ class SupaBaseStorage implements ObjectStorage {
       .from(buketName)
       .createSignedUrl(path, 5 * 60);
     if (data) {
-      return data.signedURL
+      return data.signedURL;
     } else {
       throw new Error(error?.message);
     }
