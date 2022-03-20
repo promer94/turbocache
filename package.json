@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test:login:local": "turbo login -- --url=http://localhost:3000 --api=http://localhost:3000/api",
     "test:link:local": "turbo link -- --url=http://localhost:3000 --api=http://localhost:3000/api",
-    "deploy": "primsa generate && next build"
+    "deploy": "prisma generate && next build"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.3",
