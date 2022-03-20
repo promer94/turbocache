@@ -1,10 +1,13 @@
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+  
 }
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
 model Account {
@@ -37,6 +40,7 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
+  @@index([userId])
 }
 
 model User {
@@ -78,4 +82,7 @@ model TurboToken {
   userId String @map("user_id")
   user User @relation(fields: [userId], references: [id])
   @@map("turbotoken")
+
+  @@index([userId])
+  @@index([teamId])
 }

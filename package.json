@@ -7,12 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "dev:db": "prisma migrate dev",
-    "dbview": "prisma studio",
     "test:login:local": "turbo login -- --url=http://localhost:3000 --api=http://localhost:3000/api",
     "test:link:local": "turbo link -- --url=http://localhost:3000 --api=http://localhost:3000/api",
-    "deploy:db": "prisma migrate deploy",
-    "deploy": "prisma migrate deploy && next build"
+    "deploy": "next build"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.3",
