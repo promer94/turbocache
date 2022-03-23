@@ -12,7 +12,7 @@ const hanlder = nc<RequestWithCachePath, NextApiResponse>()
     try {
       const url = await s3Storage.download(req.cache);
       res.setHeader("location", url);
-      res.status(307);
+      res.status(302);
       res.end("");
     } catch {
       res.status(404).end("");
