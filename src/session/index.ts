@@ -4,10 +4,10 @@ import {
   NextApiRequest,
   NextApiResponse,
 } from "next";
-import { getSession } from "next-auth/react";
 import { Middleware } from "next-connect";
 import is from "@sindresorhus/is";
 import { Session } from "next-auth";
+import { getSession } from "../lib/next-auth";
 
 export interface RequestWithSession extends NextApiRequest {
   user: {
@@ -67,7 +67,7 @@ export const sessionGuard = async <P>(
 export const sessionMiddleWare: () => Middleware<Request, NextApiResponse> =
   () => async (req, res, next) => {
     try {
-      const session = await getSession({ req });
+      const session = await getSession({ req, res });
       if (!session) {
         res.status(401).send("Unauthorized");
       } else {

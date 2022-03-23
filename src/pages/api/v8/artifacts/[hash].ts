@@ -4,13 +4,13 @@ import {
   RequestWithCachePath,
   turboCacheMiddleWare,
 } from "../../../../turbo-cache";
-import { supaBaseStorageClient } from "../../../../lib/supabase";
+import { s3Storage } from "../../../../lib/s3-client";
 
 const hanlder = nc<RequestWithCachePath, NextApiResponse>()
   .use(turboCacheMiddleWare())
   .get(async (req, res) => {
     try {
-      const url = await supaBaseStorageClient.download(req.cache);
+      const url = await s3Storage.download(req.cache);
       res.setHeader("location", url);
       res.status(307);
       res.end("");
@@ -20,10 +20,7 @@ const hanlder = nc<RequestWithCachePath, NextApiResponse>()
   })
   .put(async (req, res) => {
     try {
-      const result = await supaBaseStorageClient.query(req.cache);
-      if (!result) {
-        await supaBaseStorageClient.upload(req.cache, req);
-      }
+      await s3Storage.upload(req.cache, req);
       res.status(204).end("");
     } catch {
       res.status(504).end("");
