@@ -19,7 +19,8 @@ const option: NextAuthOptions = {
   },
   pages: {
     newUser: "/api/onboard",
-  }
+  },
+  secret: process.env.NEXTAUTH_SECRET
 }
 export const getSession = (
   context:

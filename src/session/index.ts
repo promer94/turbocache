@@ -51,6 +51,11 @@ export const sessionGuard = async <P>(
     }
   ) => Promise<GetServerSidePropsResult<P>>
 ): Promise<GetServerSidePropsResult<P>> => {
+  try {
+    const data = await getSession(context);
+  } catch (e) {
+    console.log(e);
+  }
   const session = getValidSession(await getSession(context));
   if (!session) {
     return {
