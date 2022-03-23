@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Middleware } from "next-connect";
 import is from "@sindresorhus/is";
-import { parseToken } from "../lib/parseToken";
-import { findToken } from "../team/token";
+import { RequestWithTokenInfo } from "../team/token";
 
 export interface RequestWithCachePath extends NextApiRequest {
   cache: string;
@@ -13,24 +12,18 @@ export interface Request extends NextApiRequest {
 }
 
 export const turboCacheMiddleWare: () => Middleware<
-  RequestWithCachePath,
+  RequestWithTokenInfo,
   NextApiResponse
 > = () => async (req, res, next) => {
-  const token = parseToken(req.headers.authorization);
-  if (is.nullOrUndefined(token)) {
-    res.status(401).end("Unauthorized");
+  const hash = req.query["hash"];
+  if (is.nullOrUndefined(hash)) {
+    res.status(403).end("no hash");
   } else {
-    const info = await findToken(token);
-    if (is.nullOrUndefined(info)) {
-      res.status(401).end("Unauthorized");
+    if (is.nullOrUndefined(req.info)) {
+      res.status(403).end("no user info");
     } else {
-      const hash = req.query["hash"];
-      if (is.nullOrUndefined(hash)) {
-        res.status(403).end("no hash");
-      } else {
-        req.cache = `${info.team.id}/${hash}`;
-        next();
-      }
+      req.cache = `${req.info.team.id}/${hash}`;
+      next();
     }
   }
 };

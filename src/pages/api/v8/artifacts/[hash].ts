@@ -1,12 +1,14 @@
 import { NextApiResponse, PageConfig } from "next";
 import nc from "next-connect";
-import {
-  RequestWithCachePath,
-  turboCacheMiddleWare,
-} from "../../../../turbo-cache";
+import { turboCacheMiddleWare } from "../../../../turbo-cache";
 import { s3Storage } from "../../../../lib/s3-client";
+import {
+  RequestWithTokenInfo,
+  tokenInfoMiddleWare,
+} from "../../../../team/token";
 
-const hanlder = nc<RequestWithCachePath, NextApiResponse>()
+const hanlder = nc<RequestWithTokenInfo, NextApiResponse>()
+  .use(tokenInfoMiddleWare())
   .use(turboCacheMiddleWare())
   .get(async (req, res) => {
     try {
@@ -22,7 +24,8 @@ const hanlder = nc<RequestWithCachePath, NextApiResponse>()
     try {
       await s3Storage.upload(req.cache, req);
       res.status(204).end("");
-    } catch {
+    } catch (e) {
+      console.log("error", e);
       res.status(504).end("");
     }
   });

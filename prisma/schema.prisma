@@ -1,12 +1,12 @@
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
   referentialIntegrity = "prisma"
-  
+
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
 }
 
@@ -39,20 +39,22 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("sessions")
   @@index([userId])
+  @@map("sessions")
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
+  email         String?      @unique
+  emailVerified DateTime?    @map("email_verified")
   image         String?
   accounts      Account[]
   sessions      Session[]
-  team Team[]
-  tokens TurboToken[]
+  team          Team[]
+  tokens        TurboToken[]
+  events        EventItem[]
+
   @@map("users")
 }
 
@@ -66,23 +68,44 @@ model VerificationToken {
 }
 
 model Team {
-  id   String  @id @default(cuid())
-  slug String? @unique
-  name String?
-  users User[]
+  id     String       @id @default(cuid())
+  slug   String?      @unique
+  name   String?
+  users  User[]
   tokens TurboToken[]
+  events EventItem[]
+
   @@map("teams")
 }
 
 model TurboToken {
-  id    String @id @default(cuid())
-  token String @unique
+  id     String @id @default(cuid())
+  token  String @unique
   teamId String @map("team_id")
-  team Team @relation(fields: [teamId], references: [id])
+  team   Team   @relation(fields: [teamId], references: [id])
   userId String @map("user_id")
-  user User @relation(fields: [userId], references: [id])
-  @@map("turbotoken")
+  user   User   @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([teamId])
+  @@map("turbotoken")
+}
+
+model EventItem {
+  id        String @id @default(cuid())
+  duration  Int?
+  event     String
+  hash      String @db.Text
+  sessionId String
+  source    String
+
+  teamId String @map("team_id")
+  team   Team   @relation(fields: [teamId], references: [id])
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id])
+
+
+  @@index([userId])
+  @@index([teamId])
+  @@map("events")
 }
