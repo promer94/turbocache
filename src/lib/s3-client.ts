@@ -1,4 +1,8 @@
-import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import {
+  GetObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 import { Readable } from "stream";
 import { TurboObjectStorage } from "./storage";
@@ -45,6 +49,13 @@ export class S3Storage implements TurboObjectStorage {
       },
     });
     return uploads3.done();
+  }
+  async signedUploadUrl(path: string): Promise<any> {
+    const command = new PutObjectCommand({
+      Key: path,
+      Bucket: this.options.bucket,
+    });
+    return getSignedUrl(this.client, command, { expiresIn: 3600 });
   }
   async download(path: string): Promise<string> {
     const command = new GetObjectCommand({

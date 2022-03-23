@@ -22,8 +22,10 @@ const hanlder = nc<RequestWithTokenInfo, NextApiResponse>()
   })
   .put(async (req, res) => {
     try {
-      await s3Storage.upload(req.cache, req);
-      res.status(204).end("");
+      const url = await s3Storage.signedUploadUrl(req.cache);
+      res.setHeader("location", url);
+      res.status(307);
+      res.end("");
     } catch (e) {
       console.log("error", e);
       res.status(504).end("");
