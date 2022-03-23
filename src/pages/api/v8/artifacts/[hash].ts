@@ -14,7 +14,7 @@ const hanlder = nc<RequestWithTokenInfo, NextApiResponse>()
     try {
       const url = await s3Storage.download(req.cache);
       res.setHeader("location", url);
-      res.status(302);
+      res.status(307);
       res.end("");
     } catch {
       res.status(404).end("");
