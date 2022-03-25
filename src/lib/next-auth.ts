@@ -18,17 +18,19 @@ const option: NextAuthOptions = {
     },
   },
   pages: {
-    newUser: "/api/onboard",
+    newUser: "/api/onboarding",
   },
-  secret: process.env.NEXTAUTH_SECRET
-}
-export const getSession = (
+  secret: process.env.NEXTAUTH_SECRET,
+};
+export const serverSession = (
   context:
     | GetServerSidePropsContext
     | {
         req: NextApiRequest;
         res: NextApiResponse;
       }
-) => getServerSession(context, option);
+) => {
+  return getServerSession(context, option)
+}
 const NextAuthHandler = NextAuth(option);
 export default NextAuthHandler

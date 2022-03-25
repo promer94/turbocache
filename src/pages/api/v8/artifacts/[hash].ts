@@ -1,14 +1,14 @@
 import { NextApiResponse, PageConfig } from "next";
 import nc from "next-connect";
-import { turboCacheMiddleWare } from "../../../../turbo-cache";
-import { s3Storage } from "../../../../lib/s3-client";
 import {
-  RequestWithTokenInfo,
-  tokenInfoMiddleWare,
-} from "../../../../team/token";
+  CacheRequst,
+  turboCacheMiddleWare,
+  turboTokenMiddleWare,
+} from "../../../../service/turbo-cache";
+import { s3Storage } from "../../../../lib/s3-client";
 
-const hanlder = nc<RequestWithTokenInfo, NextApiResponse>()
-  .use(tokenInfoMiddleWare())
+const hanlder = nc<CacheRequst, NextApiResponse>()
+  .use(turboTokenMiddleWare())
   .use(turboCacheMiddleWare())
   .get(async (req, res) => {
     try {
