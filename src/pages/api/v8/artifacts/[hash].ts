@@ -10,6 +10,16 @@ import { s3Storage } from "../../../../lib/s3-client";
 const hanlder = nc<CacheRequst, NextApiResponse>()
   .use(turboTokenMiddleWare())
   .use(turboCacheMiddleWare())
+  .head(async (req, res) => {
+    try {
+      const url = await s3Storage.signedUploadUrl(req.cache);
+      res.setHeader("tubro-url", url);
+      res.status(204).end("");
+    } catch (e) {
+      console.log("error", e);
+      res.status(504).end("");
+    }
+  })
   .get(async (req, res) => {
     try {
       const url = await s3Storage.download(req.cache);
