@@ -44,7 +44,7 @@ export const turboCacheMiddleWare: () => Middleware<
 > = () => async (req, res, next) => {
   const { hash } = req.query;
   if (is.nonEmptyString(hash)) {
-    req.cache = `/${req.teamId}/${hash}`;
+    req.cache = `${req.teamId}/${hash}`;
     next();
   } else {
     next("hash is missing");
