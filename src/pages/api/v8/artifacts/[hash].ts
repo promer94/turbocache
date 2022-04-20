@@ -6,7 +6,6 @@ import {
 } from "../../../../service/turbo-cache";
 import { s3Storage } from "../../../../lib/s3-client";
 import { defaultApiHandler } from "../../../../service/handler";
-import { logger } from "../../../../lib/logger";
 
 const hanlder = defaultApiHandler()
   .use(turboTokenMiddleWare())
@@ -18,7 +17,7 @@ const hanlder = defaultApiHandler()
         const url = await s3Storage.signedUploadUrl(req.cache);
         res.setHeader("location", url);
         req.logger.info(`OPTION, signed upload url: ${url}`);
-        res.status(307).end("");
+        res.status(200).end("");
       } else {
         res.setHeader("Access-Control-Allow-Headers", "Authorization");
         res.status(200).end("");
