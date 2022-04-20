@@ -10,16 +10,6 @@ import { defaultApiHandler } from '../../../../service/handler';
 const hanlder = defaultApiHandler()
   .use(turboTokenMiddleWare())
   .use(turboCacheMiddleWare())
-  .head<CacheRequst, NextApiResponse>(async (req, res) => {
-    try {
-      const url = await s3Storage.signedUploadUrl(req.cache);
-      res.setHeader("tubro-url", url);
-      res.status(204).end("");
-    } catch (e) {
-      console.log("error", e);
-      res.status(504).end("");
-    }
-  })
   .get<CacheRequst, NextApiResponse>(async (req, res) => {
     try {
       const url = await s3Storage.download(req.cache);
