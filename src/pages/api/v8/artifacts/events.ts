@@ -9,6 +9,10 @@ import {
 
 const hanlder = defaultApiHandler()
   .use(turboTokenMiddleWare())
+  .options((_, res) => {
+    res.setHeader("Access-Control-Allow-Headers", "Authorization");
+    res.status(200).end("");
+  })
   .post<TokenRequst, NextApiResponse>(async (req, res) => {
     try {
       if (is.nonEmptyArray(req.body)) {

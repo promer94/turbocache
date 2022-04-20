@@ -21,6 +21,7 @@ export const turboTokenMiddleWare: () => Middleware<
   NextApiResponse
 > = () => async (req, res, next) => {
   const { authorization, teamId } = parseRequest(req);
+  logger.info(req.url, req.method, req.headers.authorization)
   const turbo = await prisma.turboToken.findUnique({
     where: {
       token: authorization,
@@ -29,10 +30,9 @@ export const turboTokenMiddleWare: () => Middleware<
   if (turbo && turbo.teamId === teamId) {
     req.userId = turbo.userId;
     req.teamId = turbo.teamId;
-    logger.success("token verify success");
     next();
   } else {
-    logger.info("token verify failed");
+    logger.error("token verify failed");
     next("token verify failed");
     res.status(401).end("Bad Request");
   }
