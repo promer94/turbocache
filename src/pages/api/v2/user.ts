@@ -1,9 +1,10 @@
 import { NextApiHandler } from "next";
 import { parseToken } from '../../../lib/parseToken';
 import prisma from "../../../lib/prisma";
+import { defaultApiHandler } from '../../../service/handler';
 
 
-const handler: NextApiHandler = async (req, res) => {
+const user: NextApiHandler = async (req, res) => {
   const token = parseToken(req.headers.authorization);
   const info = await prisma.turboToken.findUnique({
     where: {
@@ -14,7 +15,7 @@ const handler: NextApiHandler = async (req, res) => {
     },
   });
   if (!info) {
-    res.status(401).end('Unauthorized')
+    res.status(401).end("Unauthorized");
   } else {
     res.json({
       user: {
@@ -25,5 +26,7 @@ const handler: NextApiHandler = async (req, res) => {
     });
   }
 };
+
+const handler = defaultApiHandler().all(user);
 
 export default handler;

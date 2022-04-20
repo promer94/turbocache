@@ -1,16 +1,16 @@
 import { NextApiResponse, PageConfig } from "next";
-import nc from "next-connect";
 import {
   CacheRequst,
   turboCacheMiddleWare,
   turboTokenMiddleWare,
 } from "../../../../service/turbo-cache";
 import { s3Storage } from "../../../../lib/s3-client";
+import { defaultApiHandler } from '../../../../service/handler';
 
-const hanlder = nc<CacheRequst, NextApiResponse>()
+const hanlder = defaultApiHandler()
   .use(turboTokenMiddleWare())
   .use(turboCacheMiddleWare())
-  .head(async (req, res) => {
+  .head<CacheRequst, NextApiResponse>(async (req, res) => {
     try {
       const url = await s3Storage.signedUploadUrl(req.cache);
       res.setHeader("tubro-url", url);
@@ -20,7 +20,7 @@ const hanlder = nc<CacheRequst, NextApiResponse>()
       res.status(504).end("");
     }
   })
-  .get(async (req, res) => {
+  .get<CacheRequst, NextApiResponse>(async (req, res) => {
     try {
       const url = await s3Storage.download(req.cache);
       res.setHeader("location", url);
@@ -30,7 +30,7 @@ const hanlder = nc<CacheRequst, NextApiResponse>()
       res.status(404).end("");
     }
   })
-  .put(async (req, res) => {
+  .put<CacheRequst, NextApiResponse>(async (req, res) => {
     try {
       await s3Storage.upload(req.cache, req);
       res.status(204).end("");

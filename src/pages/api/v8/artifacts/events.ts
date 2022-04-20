@@ -1,12 +1,12 @@
 import is from '@sindresorhus/is';
 import { NextApiResponse } from "next";
-import nc from "next-connect";
 import prisma from '../../../../lib/prisma';
+import { defaultApiHandler } from '../../../../service/handler';
 import { TokenRequst, turboTokenMiddleWare } from '../../../../service/turbo-cache';
 
-const hanlder = nc<TokenRequst, NextApiResponse>()
+const hanlder = defaultApiHandler()
   .use(turboTokenMiddleWare())
-  .post(async (req, res) => {
+  .post<TokenRequst, NextApiResponse>(async (req, res) => {
     if (is.nonEmptyArray(req.body)) {
       await prisma.eventItem.createMany({
         data: (req.body as any).map((v: any) => ({
@@ -16,7 +16,7 @@ const hanlder = nc<TokenRequst, NextApiResponse>()
         })),
       });
     }
-    res.status(204).send("");
+    res.status(200).send("");
   });
 
 export default hanlder;

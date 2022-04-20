@@ -1,6 +1,6 @@
 import { NextApiResponse } from "next";
-import nc from "next-connect";
 import prisma from "../../lib/prisma";
+import { defaultApiHandler } from '../../service/handler';
 import { sessionMiddleWare, UserRequest } from "../../service/session";
 
 const onBorad = async ({ id, name }: { id: string; name?: string | null }) => {
@@ -24,9 +24,9 @@ const onBorad = async ({ id, name }: { id: string; name?: string | null }) => {
   }
 };
 
-const handler = nc<UserRequest, NextApiResponse>()
+const handler = defaultApiHandler()
   .use(sessionMiddleWare())
-  .get(async (req, res) => {
+  .get<UserRequest, NextApiResponse>(async (req, res) => {
     await onBorad({ ...req.user });
     res.redirect("/turborepo/onboarding");
   });

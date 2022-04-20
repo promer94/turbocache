@@ -1,12 +1,12 @@
-import nc from "next-connect";
 import prisma from "../../lib/prisma";
 import { sessionMiddleWare, UserRequest } from "../../service/session";
 import { randomBytes } from "crypto";
-import { NextApiResponse } from "next";
+import { defaultApiHandler } from '../../service/handler';
+import { NextApiResponse } from 'next';
 
-const handler = nc<UserRequest, NextApiResponse>()
+const handler = defaultApiHandler()
   .use(sessionMiddleWare())
-  .post(async (req, res) => {
+  .post<UserRequest, NextApiResponse>(async (req, res) => {
     const token = await prisma.turboToken.create({
       data: {
         token: randomBytes(32).toString("hex"),
