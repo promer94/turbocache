@@ -18,7 +18,7 @@ const Success = () => {
             Enable remote cache <Badge className="!bg-pink-400 !mx-1">beta</Badge>
           </div>
           <div className="mt-[16px]"></div>
-          <Snippet toastText="copied" text={`npx turbo link -- --url=${url} --api=${api}`} width="825px" />
+          <Snippet toastText="copied" text={`npx turbo link -- --url=${url} --api=${api}`} />
         </div>
       </div>
     </div>

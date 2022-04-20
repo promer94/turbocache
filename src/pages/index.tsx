@@ -47,7 +47,7 @@ const Index = () => {
             <button
               onClick={() => {
                 copy(turbo);
-                toast.setToast({ text: '复制成功', type: 'success' });
+                toast.setToast({ text: 'copied', type: 'success' });
               }}
               className="flex items-center justify-center w-full px-8 py-3 font-mono text-sm font-medium text-gray-600 bg-black border border-transparent border-gray-200 rounded-md bg-opacity-5 dark:bg-white dark:text-gray-300 dark:border-gray-700 dark:bg-opacity-5 betterhover:hover:bg-gray-50 betterhover:dark:hover:bg-gray-900 md:py-3 md:text-base md:leading-6 md:px-10"
             >
