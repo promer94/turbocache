@@ -18,13 +18,18 @@ const hanlder = defaultApiHandler()
         res.setHeader("location", url);
         req.logger.info(`OPTION, signed upload url: ${url}`);
         res.status(200).end("");
+      } else if (method && method.toLowerCase().includes("get")) {
+        const url = await s3Storage.download(req.cache);
+        res.setHeader("location", url);
+        req.logger.info(`OPTION, signed download url: ${url}`);
+        res.status(200).end("");
       } else {
         res.setHeader("Access-Control-Allow-Headers", "Authorization");
         res.status(200).end("");
       }
     } catch (e) {
       req.logger.error(e);
-      res.status(500).end("Internal Error");
+      res.status(404).end("");
     }
   })
   .get<CacheRequst, NextApiResponse>(async (req, res) => {

@@ -47,7 +47,6 @@ export const turboCacheMiddleWare: () => Middleware<
     req.cache = `${req.teamId}/${hash}`;
     next();
   } else {
-    next("hash is missing");
     res.status(403).end("Bad Request");
   }
 };

@@ -29,6 +29,11 @@ const Onboarding = () => {
                 </div>
                 <div className="mt-[16px]"></div>
                 <Snippet toastText="copied" text={`npx turbo link -- --url=${url} --api=${api}`} width="100%" />
+                <div className="text-xl text-black font-medium flex items-center">
+                  Build your Turborepo
+                </div>
+                <div className="mt-[16px]"></div>
+                <Snippet toastText="copied" text={`npx turbo link -- --url=${url} --api=${api} --preflight`} width="100%" />
               </div>
             </div>
           </div>
