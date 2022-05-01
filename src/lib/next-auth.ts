@@ -12,11 +12,6 @@ const option: NextAuthOptions = {
       clientSecret: process.env.GITHUB_SECRET,
     }),
   ],
-  callbacks: {
-    signIn({ user }) {
-      return user.email === "yixuanxu94@outlook.com";
-    },
-  },
   pages: {
     newUser: "/api/onboarding",
   },

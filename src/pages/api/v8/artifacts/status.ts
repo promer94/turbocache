@@ -6,7 +6,7 @@ const hanlder = defaultApiHandler()
   .use(turboTokenMiddleWare())
   .get<NextApiRequest, NextApiResponse>(async (_, res) => {
     res.status(200).json({
-      status: "enable",
+      status: "enabled",
     });
   });
 

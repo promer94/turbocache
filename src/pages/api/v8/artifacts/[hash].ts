@@ -2,6 +2,7 @@ import { NextApiResponse, PageConfig } from "next";
 import {
   CacheRequst,
   turboCacheMiddleWare,
+  turboTeamMiddleWare,
   turboTokenMiddleWare,
 } from "../../../../service/turbo-cache";
 import { s3Storage } from "../../../../lib/s3-client";
@@ -10,6 +11,7 @@ import { defaultApiHandler } from "../../../../service/handler";
 const hanlder = defaultApiHandler()
   .use(turboTokenMiddleWare())
   .use(turboCacheMiddleWare())
+  .use(turboTeamMiddleWare())
   .options<CacheRequst, NextApiResponse>(async (req, res) => {
     try {
       const method = req.headers["access-control-request-method"];

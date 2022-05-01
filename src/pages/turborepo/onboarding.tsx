@@ -6,7 +6,6 @@ import { GetServerSideProps } from 'next';
 
 const Onboarding = () => {
   const { url, api } = useGuideUrl();
-
   return (
     <div className="main-container flex flex-col">
       <Nav></Nav>
@@ -49,6 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: {
         session: data.session,
+        host: context.req.headers['host']
       },
     };
   }

@@ -20,20 +20,32 @@ export const turboTokenMiddleWare: () => Middleware<
   TokenRequst,
   NextApiResponse
 > = () => async (req, res, next) => {
-  const { authorization, teamId } = parseRequest(req);
-  logger.info(req.url, req.method, req.headers.authorization)
+  const { authorization } = parseRequest(req);
+  logger.info(req.url, req.method, req.headers.authorization);
   const turbo = await prisma.turboToken.findUnique({
     where: {
       token: authorization,
     },
   });
-  if (turbo && turbo.teamId === teamId) {
+  if (turbo) {
     req.userId = turbo.userId;
     req.teamId = turbo.teamId;
     next();
   } else {
     logger.error("token verify failed");
-    next("token verify failed");
+    res.status(401).end("Bad Request");
+  }
+};
+
+export const turboTeamMiddleWare: () => Middleware<
+  TokenRequst,
+  NextApiResponse
+> = () => async (req, res, next) => {
+  const { teamId } = parseRequest(req);
+  if (req.teamId === teamId) {
+    next();
+  } else {
+    logger.error("Team mismatch");
     res.status(401).end("Bad Request");
   }
 };
