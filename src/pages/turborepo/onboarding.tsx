@@ -8,12 +8,12 @@ const Onboarding = () => {
   const { url, api } = useGuideUrl();
 
   return (
-    <div className="h-full min-w-[1024px]">
+    <div className="main-container flex flex-col">
       <Nav></Nav>
-      <div className="mt-[140px]"></div>
-      <div className="flex flex-col items-center">
+      <div className="mt-[120px]"></div>
+      <div className="m-auto flex flex-col items-center">
         <section className="text-gray-600 body-font">
-          <div className="container px-5 py-24">
+          <div className="container px-5">
             <div className="flex flex-col">
               <div className="p-2 w-full">
                 <div className="text-xl text-black font-medium">Install turbo CLI</div>

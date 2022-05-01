@@ -5,15 +5,16 @@ import { getServerSideSession } from '../../service/session';
 
 const Token = ({ redirectUrl = 'http://127.0.0.1:9789' }: { redirectUrl: string }) => (
   <div>
-    <div className="h-full">
+    <div className="main-container flex flex-col">
       <Nav></Nav>
-      <div className="mt-[140px]"></div>
-      <div className="max-w-[500px] m-auto flex flex-col items-center">
+      <div className="mt-[120px]"></div>
+      <div className="m-auto flex flex-col items-center">
         <div className="text-[40px] inline-block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500 ">
-          Authorize Turborepo CLI
+          Connect Turbocache
         </div>
         <div className="mt-[70px]"></div>
         <Button
+          ghost
           shadow
           type="secondary"
           onClick={() => {
@@ -28,9 +29,9 @@ const Token = ({ redirectUrl = 'http://127.0.0.1:9789' }: { redirectUrl: string 
                 window.location.href = `${redirectUrl}?token=${v.token}`;
               });
           }}
-          className="width-[320px]"
+          className="width-[480px]"
         >
-          🔐
+          Authorize 
         </Button>
       </div>
     </div>

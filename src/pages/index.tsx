@@ -16,15 +16,11 @@ const Index = () => {
         <meta name="og:description" content="Turbocache is a remote cache server implmentation of turborepo" />
       </Head>
       <div className="px-4 pt-16 pb-8 sm:px-6 sm:pt-24 lg:px-8 dark:text-white dark:bg-black ">
-        <h1 className="text-center text-6xl font-extrabold tracking-tighter leading-[1.1] sm:text-7xl lg:text-8xl xl:text-8xl">
-          Turbocache that
-          <br className="hidden lg:block" />
-          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500 ">
-            make monorepos fast
-          </span>
+        <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600  text-center text-6xl font-extrabold tracking-tighter leading-[1.1] sm:text-7xl lg:text-8xl xl:text-8xl">
+          Turbocache
         </h1>
         <p className="max-w-lg mx-auto mt-6 text-xl font-medium leading-tight text-center text-gray-400 sm:max-w-xl sm:text-xl md:text-2xl lg:text-2xl">
-          Turbocache is a remote cache server implmentation of Turborepo
+          A simple remote cache server for Turborepo
         </p>
         <div className="max-w-xl mx-auto mt-5 sm:flex sm:justify-center md:mt-8">
           <div className="rounded-md ">

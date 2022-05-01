@@ -73,10 +73,10 @@ export const sessionMiddleWare: () => Middleware<
       });
       if (user) {
         req.user = user;
+        next();
       } else {
         res.status(404).send("user info is missing");
       }
-      next();
     }
   } catch (e) {
     req.logger.error(e);
