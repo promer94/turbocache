@@ -27,13 +27,7 @@ const Onboarding = () => {
                   Enable remote cache <Badge className="!bg-pink-400 !mx-1">beta</Badge>
                 </div>
                 <div className="mt-[16px]"></div>
-                <Snippet toastText="copied" text={`npx turbo link -- --url=${url} --api=${api}`} width="100%" />
-                <div className="mt-[32px]"></div>
-                <div className="text-xl text-black font-medium flex items-center">
-                  Build your Turborepo
-                </div>
-                <div className="mt-[16px]"></div>
-                <Snippet toastText="copied" text={`npx turbo link -- --url=${url} --api=${api} --preflight`} width="100%" />
+                <Snippet toastText="copied" text={`npx turbo link -- --url=${url} --api=${api}`} width="100%" />   
               </div>
             </div>
           </div>

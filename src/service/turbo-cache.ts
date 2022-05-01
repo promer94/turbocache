@@ -21,7 +21,7 @@ export const turboTokenMiddleWare: () => Middleware<
   NextApiResponse
 > = () => async (req, res, next) => {
   const { authorization } = parseRequest(req);
-  logger.info(req.url, req.method, req.headers.authorization);
+  logger.info(req.method, req.url, "authorization", authorization);
   const turbo = await prisma.turboToken.findUnique({
     where: {
       token: authorization,

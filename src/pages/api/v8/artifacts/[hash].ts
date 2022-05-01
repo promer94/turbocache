@@ -10,8 +10,8 @@ import { defaultApiHandler } from "../../../../service/handler";
 
 const hanlder = defaultApiHandler()
   .use(turboTokenMiddleWare())
-  .use(turboCacheMiddleWare())
   .use(turboTeamMiddleWare())
+  .use(turboCacheMiddleWare())
   .options<CacheRequst, NextApiResponse>(async (req, res) => {
     try {
       const method = req.headers["access-control-request-method"];
@@ -41,7 +41,7 @@ const hanlder = defaultApiHandler()
       res.setHeader("location", url);
       res.status(307);
       res.end("");
-    } catch(e) {
+    } catch (e) {
       req.logger.error(e);
       res.status(404).end("");
     }
