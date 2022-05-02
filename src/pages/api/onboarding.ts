@@ -12,7 +12,6 @@ const onBorad = async ({ id, name }: { id: string; name?: string | null }) => {
   if (!team) {
     return prisma.team.create({
       data: {
-        id,
         name,
         users: {
           connect: {
@@ -27,7 +26,7 @@ const onBorad = async ({ id, name }: { id: string; name?: string | null }) => {
 const handler = defaultApiHandler()
   .use(sessionMiddleWare())
   .get<UserRequest, NextApiResponse>(async (req, res) => {
-    await onBorad({ ...req.user });
+    await onBorad({ id: req.user.id, name: `${req.user.name}'s personal team` });
     res.redirect("/turborepo/onboarding");
   });
 

@@ -31,6 +31,6 @@ const user = async (req: LoggerRequest, res: NextApiResponse) => {
   }
 };
 
-const handler = defaultApiHandler().all(user);
+const handler = defaultApiHandler().get(user);
 
 export default handler;
