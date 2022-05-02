@@ -18,12 +18,10 @@ const hanlder = defaultApiHandler()
       if (method && method.toLowerCase().includes("put")) {
         const url = await s3Storage.signedUploadUrl(req.cache);
         res.setHeader("location", url);
-        req.logger.info(`OPTION, signed upload url: ${url}`);
         res.status(200).end("");
       } else if (method && method.toLowerCase().includes("get")) {
         const url = await s3Storage.download(req.cache);
         res.setHeader("location", url);
-        req.logger.info(`OPTION, signed download url: ${url}`);
         res.status(200).end("");
       } else {
         res.setHeader("Access-Control-Allow-Headers", "Authorization");
@@ -37,7 +35,6 @@ const hanlder = defaultApiHandler()
   .get<CacheRequst, NextApiResponse>(async (req, res) => {
     try {
       const url = await s3Storage.download(req.cache);
-      req.logger.info(`GET, signed download url: ${url}`);
       res.setHeader("location", url);
       res.status(307);
       res.end("");

@@ -7,6 +7,8 @@ import { Upload } from "@aws-sdk/lib-storage";
 import { Readable } from "stream";
 import { TurboObjectStorage } from "./storage";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { Consola } from 'consola';
+import { logger } from './logger';
 
 const region = process.env.AWS_S3_REGION;
 const keyId = process.env.AWS_ACCESSKEY_ID;
@@ -20,6 +22,7 @@ const defaultOption = {
     accessKeyId: keyId,
   },
   bucket,
+  logger: logger
 };
 
 const createS3Client = (option = defaultOption) => new S3Client(option);
@@ -33,6 +36,7 @@ export class S3Storage implements TurboObjectStorage {
       accessKeyId: string;
     };
     bucket: string;
+    logger: Consola
   };
   constructor(options = defaultOption) {
     this.options = options;

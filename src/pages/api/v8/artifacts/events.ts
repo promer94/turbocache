@@ -27,7 +27,6 @@ const hanlder = defaultApiHandler()
     } catch (e) {
       req.logger.error(e);
     }
-
     res.status(200).send("");
   });
 
