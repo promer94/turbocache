@@ -21,6 +21,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         <meta name="og:title" content="Turbocache" />
         <meta property="og:locale" content="en_IE" />
         <meta property="og:site_name" content="Turbocache" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="image" content="https://i.microlink.io/https%3A%2F%2Fcards.microlink.io%2F%3Fpreset%3Dcontentz%26description%3DA%2Bsimple%2Bremote%2Bcache%2Bserver%2Bfor%2BTurborepo%26title%3DTurbocache" />
+        <meta itemProp="image" content="https://i.microlink.io/https%3A%2F%2Fcards.microlink.io%2F%3Fpreset%3Dcontentz%26description%3DA%2Bsimple%2Bremote%2Bcache%2Bserver%2Bfor%2BTurborepo%26title%3DTurbocache" />
+        <meta name="twitter:image" content="https://i.microlink.io/https%3A%2F%2Fcards.microlink.io%2F%3Fpreset%3Dcontentz%26description%3DA%2Bsimple%2Bremote%2Bcache%2Bserver%2Bfor%2BTurborepo%26title%3DTurbocache" />
+        <meta property="og:image" content="https://i.microlink.io/https%3A%2F%2Fcards.microlink.io%2F%3Fpreset%3Dcontentz%26description%3DA%2Bsimple%2Bremote%2Bcache%2Bserver%2Bfor%2BTurborepo%26title%3DTurbocache" />
       </Head>
       <SessionProvider session={session}>
         <Component {...pageProps} />
