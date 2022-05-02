@@ -1,6 +1,4 @@
 import { Button } from '@geist-ui/core';
-import { GetServerSideProps } from 'next';
-import { getServerSideSession } from '../../service/session';
 import { Layout } from '../../components/Layout';
 
 const Token = ({ redirectUrl = 'http://127.0.0.1:9789' }: { redirectUrl: string }) => (
@@ -32,17 +30,6 @@ const Token = ({ redirectUrl = 'http://127.0.0.1:9789' }: { redirectUrl: string 
     </div>
   </div>
 );
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const [data, redirect] = await getServerSideSession(context);
-  if (data) {
-    return {
-      props: {
-        session: data.session,
-      },
-    };
-  }
-  return redirect;
-};
 
 Token.getLayout = Layout
 export default Token;
