@@ -17,7 +17,7 @@ Turbocache is an open-source remote cache server for [Turborepo](https://turbore
 rename .env.example.local to .env.local
 
 ```
-# Get this from plantscale
+# Get this from PlantScale
 # Tutorial https://www.youtube.com/watch?v=Sx4pFi0je5w
 DATABASE_URL=
 
@@ -61,13 +61,19 @@ pnpx prisma generate
 pnpm dev
 ```
 
+### Deployment
+
+```bash
+pnpm deploy
+```
+
 ## Built With
 
 - [Next.js](https://nextjs.org)
 
 - [Prsima](https://www.prisma.io)
 
-- [Planetscale](https://planetscale.com)
+- [PlantScale](https://planetscale.com)
 
 - [NextAuth](https://next-auth.js.org)
 
