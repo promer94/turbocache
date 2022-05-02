@@ -80,3 +80,7 @@ pnpm deploy
 - [AWS S3](https://aws.amazon.com/s3)
 
 - [Vercel](https://vercel.com)
+
+---
+
+[![Vercel](./public/powered-by-vercel.svg)](https://vercel.com?utm_source=promer94&utm_campaign=oss)

@@ -2,6 +2,7 @@ import { useClipboard, useToasts } from '@geist-ui/core';
 import { signIn, useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { Footer } from '../components/Footer';
 
 const turbo = 'npx create-turbo';
 const Index = () => {
@@ -71,6 +72,7 @@ const Index = () => {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };
