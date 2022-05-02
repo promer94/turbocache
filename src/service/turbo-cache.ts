@@ -21,7 +21,6 @@ export const turboTokenMiddleWare: () => Middleware<
   NextApiResponse
 > = () => async (req, res, next) => {
   const { authorization } = parseRequest(req);
-  logger.info(req.method, req.url, "authorization", authorization);
   const turbo = await prisma.turboToken.findUnique({
     where: {
       token: authorization,
@@ -42,7 +41,7 @@ export const turboTeamMiddleWare: () => Middleware<
   NextApiResponse
 > = () => async (req, res, next) => {
   const { teamId } = parseRequest(req);
-  if (req.teamId === teamId) {
+  if (req.teamId === teamId || !teamId) {
     next();
   } else {
     logger.error("Team mismatch");
