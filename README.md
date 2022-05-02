@@ -1,6 +1,12 @@
+<div align="center">
+  <h1 align="center">Turbocache</h3>
+</div>
 ## About The Project
 
 Turbocache is an open-source remote cache server for [Turborepo](https://turborepo.org/docs/core-concepts/remote-caching). It's only built for learning purpose and demostration. ***For production work, you should use vercel's offcial remote cache server.***
+
+## Deploy on vercel
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fpromer94%2Fturbocache&env=DATABASE_URL,AWS_ACCESSKEY_ID,AWS_ACCESSKEY_TOKEN,AWS_S3_BUCKET,AWS_S3_REGION,NEXTAUTH_SECRET,NEXTAUTH_URL,GITHUB_ID,GITHUB_SECRET&project-name=my-turbocache&repo-name=my-turbocache)
 
 ### Built With
 
@@ -38,29 +44,24 @@ NEXTAUTH_URL=
 GITHUB_SECRET=
 GITHUB_ID=
 ```
-#### Install the dependcies
+#### Setup and Running
 
 ```bash
 pnpm install
 ```
-#### Setup and connect your database with Prisma CLI
 
-* Setup Database
+* setup database
 ```bash
 pnpx prisma migrate dev
 ```
 
-* Generate Prisma Client
+* generate prisma client
 ```bash
 pnpx prisma generate
 ```
-
-#### Running
 
 ```bash
 pnpm dev
 ```
 
 
-### Deploy on vercel
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fpromer94%2Fturbocache&env=DATABASE_URL,AWS_ACCESSKEY_ID,AWS_ACCESSKEY_TOKEN,AWS_S3_BUCKET,AWS_S3_REGION,NEXTAUTH_SECRET,NEXTAUTH_URL,GITHUB_ID,GITHUB_SECRET&envDescription=Github%20Oauth%20Config&envLink=https%3A%2F%2Fdocs.github.com%2Fen%2Fdevelopers%2Fapps%2Fgetting-started-with-apps%2Fabout-apps&project-name=my-turbocache&repo-name=my-turbocache)
