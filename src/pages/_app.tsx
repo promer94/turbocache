@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     <GeistProvider>
       <Head>
         <title>Turbocache</title>
-        <meta name="og:description" content="Turbocache is a remote cache server implmentation of turborepo" />
+        <meta name="og:description" content="A simple remote cache server for Turborepo" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png" />
