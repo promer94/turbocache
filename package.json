@@ -37,6 +37,8 @@
   },
   "devDependencies": {
     "@types/node": "17.0.31",
+    "@types/react": "17.0.44",
+    "autoprefixer": "^10.4.6",
     "@types/react": "17.0.40",
     "autoprefixer": "10.4.7",
     "eslint": "8.11.0",
