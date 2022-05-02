@@ -6,6 +6,8 @@ import { GeistProvider } from '@geist-ui/core';
 import Head from 'next/head';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+  /** @ts-expect-error */
+  const getLayout = Component.getLayout || ((page) => page)
   return (
     <GeistProvider>
       <Head>
@@ -28,7 +30,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         <meta property="og:image" content="https://i.microlink.io/https%3A%2F%2Fcards.microlink.io%2F%3Fpreset%3Dcontentz%26description%3DA%2Bsimple%2Bremote%2Bcache%2Bserver%2Bfor%2BTurborepo%26title%3DTurbocache" />
       </Head>
       <SessionProvider session={session}>
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
       </SessionProvider>
     </GeistProvider>
   );

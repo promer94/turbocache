@@ -10,12 +10,12 @@ const Index = () => {
   const { copy } = useClipboard();
   const toast = useToasts();
   return (
-    <>
+    <div className='flex flex-col justify-center items-center h-full'>
       <Head>
         <title>Turbocache</title>
         <meta name="og:description" content="Turbocache is a remote cache server implmentation of turborepo" />
       </Head>
-      <div className="px-4 pt-16 pb-8 sm:px-6 sm:pt-24 lg:px-8 h-full">
+      <div className="md:flex md:flex-col md:justify-start px-4 pt-16 pb-8 sm:px-6 sm:pt-24 lg:px-8 h-full flex flex-col justify-center items-center">
         <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600  text-center text-6xl font-extrabold tracking-tighter leading-[1.1] sm:text-7xl lg:text-8xl xl:text-8xl">
           Turbocache
         </h1>
@@ -43,7 +43,7 @@ const Index = () => {
             <button
               onClick={() => {
                 copy(turbo);
-                toast.setToast({ text: 'copied', type: 'success' });
+                toast.setToast({ text: 'Copied to clipboard', type: 'success' });
               }}
               className="flex items-center justify-center w-full px-8 py-3 font-mono text-sm font-medium text-gray-600 bg-black border border-transparent border-gray-200 rounded-md bg-opacity-5 betterhover:hover:bg-gray-50 md:py-3 md:text-base md:leading-6 md:px-10"
             >
@@ -71,7 +71,7 @@ const Index = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
