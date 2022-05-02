@@ -1,5 +1,14 @@
 {
-  "name": "turbo-serve",
+  "name": "turbocache",
+  "description": "A simple remote cache server for Turborepo",
+  "author": {
+    "name": "promer94",
+    "email": "yixuanxu94@outlook.com",
+    "url": "https://github.com/promer94"
+  },
+  "repository": {
+    "url": "https://github.com/promer94/turbocache"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,36 +16,33 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:login:local": "turbo login -- --url=http://localhost:3000 --api=http://localhost:3000/api",
-    "test:link:local": "turbo link -- --url=http://localhost:3000 --api=http://localhost:3000/api",
     "deploy": "prisma generate && next build"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.72.0",
-    "@aws-sdk/lib-storage": "^3.72.0",
-    "@aws-sdk/s3-request-presigner": "^3.72.0",
+    "@aws-sdk/client-s3": "^3.81.0",
+    "@aws-sdk/lib-storage": "^3.81.0",
+    "@aws-sdk/s3-request-presigner": "^3.81.0",
     "@geist-ui/core": "^2.3.8",
     "@next-auth/prisma-adapter": "^1.0.3",
-    "@prisma/client": "^3.12.0",
+    "@prisma/client": "^3.13.0",
     "@sindresorhus/is": "^4.6.0",
     "consola": "^2.15.3",
-    "got": "^12.0.2",
+    "got": "^12.0.4",
     "next": "12.1.5",
-    "next-auth": "^4.3.2",
+    "next-auth": "^4.3.4",
     "next-connect": "^0.12.2",
-    "prisma": "^3.12.0",
+    "prisma": "^3.13.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "turbo": "^1.2.4"
+    "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@types/node": "17.0.21",
+    "@types/node": "17.0.31",
     "@types/react": "17.0.40",
-    "autoprefixer": "^10.4.4",
+    "autoprefixer": "^10.4.6",
     "eslint": "8.11.0",
-    "eslint-config-next": "12.1.0",
-    "postcss": "^8.4.12",
+    "eslint-config-next": "12.1.5",
+    "postcss": "^8.4.13",
     "tailwindcss": "^3.0.24",
-    "typescript": "4.6.2"
+    "typescript": "4.6.4"
   }
 }
