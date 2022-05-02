@@ -69,7 +69,7 @@ pnpm dev
 
 - [Planetscale](https://planetscale.com)
 
-- [Next-Auth](https://next-auth.js.org)
+- [NextAuth](https://next-auth.js.org)
 
 - [AWS S3](https://aws.amazon.com/s3)
 
