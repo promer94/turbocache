@@ -15,7 +15,7 @@ const teams = async (req: LoggerRequest, res: NextApiResponse) => {
     if (!info) {
       res.status(401).end("Unauthorized");
     } else {
-      res.json({
+      res.status(200).json({
         teams: [
           {
             id: `team_${info.teamId}`,
@@ -24,6 +24,11 @@ const teams = async (req: LoggerRequest, res: NextApiResponse) => {
             membership: "OWNER",
           },
         ],
+        pagination: {
+          count: 1,
+          next: null,
+          prev: null,
+        },
       });
     }
   } catch (e) {
