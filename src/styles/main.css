@@ -1,0 +1,19 @@
+html {
+  @apply h-full
+}
+body {
+  @apply h-full
+}
+#__next {
+  @apply h-full overflow-x-auto
+}
+
+pre {
+  @apply truncate
+}
+
+
+.nav {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02),
+    0 -1px 0 rgba(0, 0, 0, 0.06) inset;
+}

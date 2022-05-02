@@ -5,13 +5,13 @@ const Nav = () => {
   const { data } = useSession<true>();
   return (
     <>
-      <div className="absolute w-full bg-white dark:bg-dark">
+      <div className="absolute w-full bg-white nav">
         <div className="text-sm h-10 sticky top-0 md:relative pl-10 flex items-center text-slate-50 bg-neutral-900 dark:bg-neutral-700 dark:text-white z-20">
           <div className="max-w-[90rem] mx-auto w-full py-1 text-center font-medium pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] truncate whitespace-nowrap">
             Warning: This website is only used for DEMONSTRATION !
           </div>
         </div>
-        <nav className="nav flex max-w-[90rem] mx-auto items-center left-0 right-0 h-16 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
+        <nav className="flex max-w-[90rem] mx-auto items-center left-0 right-0 h-16 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
           <div className="flex-auto">
             <Link href="/">
               <a>

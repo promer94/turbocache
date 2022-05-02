@@ -14,20 +14,20 @@ const Onboarding = () => {
         <section className="text-gray-600 body-font">
           <div className="container px-5">
             <div className="flex flex-col">
-              <div className="p-2 w-full">
+              <div className="p-2">
                 <div className="text-xl text-black font-medium">Install turbo CLI</div>
                 <div className="mt-[16px]"></div>
-                <Snippet toastText="copied" text="npx create-turbo" width="100%" />
+                <Snippet toastText="copied" text="npx create-turbo" />
                 <div className="mt-[32px]"></div>
                 <div className="text-xl text-black font-medium">Login</div>
                 <div className="mt-[16px]"></div>
-                <Snippet toastText="copied" text={`npx turbo login -- --url=${url} --api=${api}`} width="100%" />
+                <Snippet toastText="copied" text={`npx turbo login -- --url=${url} --api=${api}`} />
                 <div className="mt-[32px]"></div>
                 <div className="text-xl text-black font-medium flex items-center">
                   Enable remote cache <Badge className="!bg-pink-400 !mx-1">beta</Badge>
                 </div>
                 <div className="mt-[16px]"></div>
-                <Snippet toastText="copied" text={`npx turbo link -- --url=${url} --api=${api}`} width="100%" />   
+                <Snippet toastText="copied" text={`npx turbo link -- --url=${url} --api=${api}`}/>
               </div>
             </div>
           </div>

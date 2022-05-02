@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import '../styles/tailwind.css';
-import '../styles/nav.css'
+import '../styles/main.css'
 import { GeistProvider } from '@geist-ui/core';
 import Head from 'next/head';
 
