@@ -4,6 +4,7 @@ import prisma from '../../../lib/prisma';
 import { defaultApiHandler } from '../../../service/handler';
 import { LoggerRequest } from '../../../service/log';
 
+
 const teams = async (req: LoggerRequest, res: NextApiResponse) => {
   const token = parseToken(req.headers.authorization);
   try {
@@ -19,9 +20,9 @@ const teams = async (req: LoggerRequest, res: NextApiResponse) => {
         teams: [
           {
             id: `team_${info.teamId}`,
-            slug: info.userId,
             name: "default team",
-            membership: "OWNER",
+            /*
+            membership: "OWNER", */
           },
         ],
         pagination: {
