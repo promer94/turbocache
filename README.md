@@ -46,7 +46,7 @@ pnpm install
 ### Setup Database
 
 ```bash
-pnpx prisma migrate dev
+pnpx prisma db push
 ```
 
 ### Generate Prisma Client
