@@ -1,0 +1,380 @@
+{
+  "version": 1,
+  "collections": [
+    {
+      "id": "fb9bc24c-eac2-4a48-a96f-fdb7f7b74f7d",
+      "uid": "0-fb9bc24c-eac2-4a48-a96f-fdb7f7b74f7d",
+      "name": "turbocache",
+      "description": null,
+      "auth": null,
+      "events": null,
+      "variables": [],
+      "order": [
+        "edd9b74a-5e2d-467b-9d71-c0c9fbdb3cbc",
+        "7c3c692d-df8a-4a82-babd-86d7e12ab7d9",
+        "e9d5088f-d41c-416d-a566-cfefd360c812",
+        "97717d77-5b57-4940-8549-fa60178f7e15",
+        "810eab6b-2041-4d56-8eea-de8933fafa9e",
+        "d5a080ba-09c7-4dd5-b05c-6c4f4326b3f9",
+        "b7479a20-2fb7-4219-bc3f-c122fdf319a0",
+        "3d12f08f-a658-4ccd-9a0c-81b2ba9ff314"
+      ],
+      "folders_order": [],
+      "protocolProfileBehavior": {},
+      "createdAt": "2022-03-18T16:08:26.779Z",
+      "folders": [],
+      "requests": [
+        {
+          "id": "3d12f08f-a658-4ccd-9a0c-81b2ba9ff314",
+          "uid": "0-3d12f08f-a658-4ccd-9a0c-81b2ba9ff314",
+          "name": "PUT Preflight Copy",
+          "url": "{{host}}/api/v8/artifacts/f6a713ccf59f634?teamid=cl0z5rmyk001009m58gm9c9ax",
+          "description": null,
+          "data": null,
+          "dataOptions": null,
+          "dataMode": null,
+          "headerData": [
+            {
+              "key": "access-control-request-method",
+              "value": "PUT",
+              "description": "",
+              "type": "default",
+              "enabled": true
+            },
+            {
+              "key": "",
+              "value": "",
+              "description": "",
+              "type": "default",
+              "enabled": false
+            }
+          ],
+          "method": "OPTIONS",
+          "pathVariableData": [],
+          "queryParams": [
+            {
+              "key": "teamid",
+              "value": "cl0z5rmyk001009m58gm9c9ax",
+              "equals": true,
+              "description": null,
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{token}}"
+              }
+            ]
+          },
+          "events": null,
+          "folder": null,
+          "responses_order": [],
+          "currentHelper": "bearerAuth",
+          "helperAttributes": {
+            "id": "bearer",
+            "token": "{{token}}"
+          },
+          "collectionId": "fb9bc24c-eac2-4a48-a96f-fdb7f7b74f7d",
+          "headers": "access-control-request-method: PUT\n",
+          "pathVariables": {}
+        },
+        {
+          "id": "7c3c692d-df8a-4a82-babd-86d7e12ab7d9",
+          "uid": "0-7c3c692d-df8a-4a82-babd-86d7e12ab7d9",
+          "name": "Upload Cacahe",
+          "url": "{{host}}/api/v8/artifacts/f6a713ccf59f634?teamId={{teamId}}",
+          "description": null,
+          "data": [],
+          "dataOptions": null,
+          "dataMode": "binary",
+          "headerData": null,
+          "method": "PUT",
+          "pathVariableData": [],
+          "queryParams": [
+            {
+              "key": "teamId",
+              "value": "{{teamId}}",
+              "equals": true,
+              "description": null,
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{token}}"
+              }
+            ]
+          },
+          "events": null,
+          "folder": null,
+          "responses_order": [],
+          "currentHelper": "bearerAuth",
+          "helperAttributes": {
+            "id": "bearer",
+            "token": "{{token}}"
+          },
+          "collectionId": "fb9bc24c-eac2-4a48-a96f-fdb7f7b74f7d",
+          "rawModeData": null,
+          "pathVariables": {}
+        },
+        {
+          "id": "810eab6b-2041-4d56-8eea-de8933fafa9e",
+          "uid": "0-810eab6b-2041-4d56-8eea-de8933fafa9e",
+          "name": "Events",
+          "url": "{{host}}/api/v8/artifacts/events",
+          "description": null,
+          "data": null,
+          "dataOptions": null,
+          "dataMode": null,
+          "headerData": null,
+          "method": "POST",
+          "pathVariableData": [],
+          "queryParams": [],
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{token}}"
+              }
+            ]
+          },
+          "events": null,
+          "folder": null,
+          "responses_order": [],
+          "currentHelper": "bearerAuth",
+          "helperAttributes": {
+            "id": "bearer",
+            "token": "{{token}}"
+          },
+          "collectionId": "fb9bc24c-eac2-4a48-a96f-fdb7f7b74f7d",
+          "pathVariables": {}
+        },
+        {
+          "id": "97717d77-5b57-4940-8549-fa60178f7e15",
+          "uid": "0-97717d77-5b57-4940-8549-fa60178f7e15",
+          "name": "Team",
+          "url": "{{host}}/api/v2/teams",
+          "description": null,
+          "data": null,
+          "dataOptions": null,
+          "dataMode": null,
+          "headerData": null,
+          "method": "GET",
+          "pathVariableData": [],
+          "queryParams": [],
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{token}}"
+              }
+            ]
+          },
+          "events": null,
+          "folder": null,
+          "responses_order": [],
+          "currentHelper": "bearerAuth",
+          "helperAttributes": {
+            "id": "bearer",
+            "token": "{{token}}"
+          },
+          "collectionId": "fb9bc24c-eac2-4a48-a96f-fdb7f7b74f7d",
+          "pathVariables": {}
+        },
+        {
+          "id": "b7479a20-2fb7-4219-bc3f-c122fdf319a0",
+          "uid": "0-b7479a20-2fb7-4219-bc3f-c122fdf319a0",
+          "name": "Get Preflight",
+          "url": "{{host}}/api/v8/artifacts/f6a713ccf59f634?teamId=cl0z5rmyk001009m58gm9c9ax",
+          "description": null,
+          "data": null,
+          "dataOptions": null,
+          "dataMode": null,
+          "headerData": [
+            {
+              "key": "access-control-request-method",
+              "value": "GET",
+              "description": "",
+              "type": "default",
+              "enabled": true
+            }
+          ],
+          "method": "OPTIONS",
+          "pathVariableData": [],
+          "queryParams": [
+            {
+              "key": "teamId",
+              "value": "cl0z5rmyk001009m58gm9c9ax",
+              "equals": true,
+              "description": null,
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{token}}"
+              }
+            ]
+          },
+          "events": null,
+          "folder": null,
+          "responses_order": [],
+          "currentHelper": "bearerAuth",
+          "helperAttributes": {
+            "id": "bearer",
+            "token": "{{token}}"
+          },
+          "collectionId": "fb9bc24c-eac2-4a48-a96f-fdb7f7b74f7d",
+          "headers": "access-control-request-method: GET\n",
+          "pathVariables": {}
+        },
+        {
+          "id": "d5a080ba-09c7-4dd5-b05c-6c4f4326b3f9",
+          "uid": "0-d5a080ba-09c7-4dd5-b05c-6c4f4326b3f9",
+          "name": "Status",
+          "url": "{{host}}/api/v8/artifacts/status",
+          "description": null,
+          "data": null,
+          "dataOptions": null,
+          "dataMode": null,
+          "headerData": null,
+          "method": "GET",
+          "pathVariableData": [],
+          "queryParams": [],
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{token}}"
+              }
+            ]
+          },
+          "events": null,
+          "folder": null,
+          "responses_order": [],
+          "currentHelper": "bearerAuth",
+          "helperAttributes": {
+            "id": "bearer",
+            "token": "{{token}}"
+          },
+          "collectionId": "fb9bc24c-eac2-4a48-a96f-fdb7f7b74f7d",
+          "pathVariables": {}
+        },
+        {
+          "id": "e9d5088f-d41c-416d-a566-cfefd360c812",
+          "uid": "0-e9d5088f-d41c-416d-a566-cfefd360c812",
+          "name": "User",
+          "url": "{{host}}/api/v2/user",
+          "description": null,
+          "data": null,
+          "dataOptions": null,
+          "dataMode": null,
+          "headerData": null,
+          "method": "GET",
+          "pathVariableData": [],
+          "queryParams": [],
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{token}}"
+              }
+            ]
+          },
+          "events": null,
+          "folder": null,
+          "responses_order": [],
+          "currentHelper": "bearerAuth",
+          "helperAttributes": {
+            "id": "bearer",
+            "token": "{{token}}"
+          },
+          "collectionId": "fb9bc24c-eac2-4a48-a96f-fdb7f7b74f7d",
+          "pathVariables": {}
+        },
+        {
+          "id": "edd9b74a-5e2d-467b-9d71-c0c9fbdb3cbc",
+          "uid": "0-edd9b74a-5e2d-467b-9d71-c0c9fbdb3cbc",
+          "name": "Fetch Cache",
+          "url": "{{host}}/api/v8/artifacts/f6a713ccf59f634?teamId={{teamId}}",
+          "description": null,
+          "data": null,
+          "dataOptions": null,
+          "dataMode": null,
+          "headerData": null,
+          "method": "GET",
+          "pathVariableData": [],
+          "queryParams": [
+            {
+              "key": "teamId",
+              "value": "{{teamId}}",
+              "equals": true,
+              "description": null,
+              "enabled": true
+            }
+          ],
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{token}}"
+              }
+            ]
+          },
+          "events": null,
+          "folder": null,
+          "responses_order": [],
+          "currentHelper": "bearerAuth",
+          "helperAttributes": {
+            "id": "bearer",
+            "token": "{{token}}"
+          },
+          "collectionId": "fb9bc24c-eac2-4a48-a96f-fdb7f7b74f7d",
+          "pathVariables": {}
+        }
+      ]
+    }
+  ],
+  "environments": [
+    {
+      "id": "7f4a98ce-65b1-4ddb-96d7-98fee2371b39",
+      "name": "development",
+      "values": [
+        {
+          "key": "host",
+          "value": "http://localhost.com:3000",
+          "type": "default",
+          "enabled": true
+        },
+        {
+          "key": "token",
+          "value": "",
+          "type": "secret",
+          "enabled": true
+        },
+        {
+          "key": "teamId",
+          "value": "",
+          "type": "default",
+          "enabled": true
+        }
+      ]
+    }
+  ],
+  "headerPresets": [],
+  "globals": []
+}
