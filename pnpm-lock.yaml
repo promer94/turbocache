@@ -5,6 +5,7 @@ specifiers:
   '@aws-sdk/lib-storage': 3.81.0
   '@aws-sdk/s3-request-presigner': 3.81.0
   '@geist-ui/core': 2.3.8
+  '@geist-ui/icons': 1.0.1
   '@next-auth/prisma-adapter': 1.0.3
   '@prisma/client': 3.13.0
   '@sindresorhus/is': 4.6.0
@@ -29,6 +30,7 @@ dependencies:
   '@aws-sdk/lib-storage': 3.81.0_@aws-sdk+client-s3@3.81.0
   '@aws-sdk/s3-request-presigner': 3.81.0
   '@geist-ui/core': 2.3.8_react-dom@17.0.2+react@17.0.2
+  '@geist-ui/icons': 1.0.1_react@17.0.2
   '@next-auth/prisma-adapter': 1.0.3_a6dc61f73c506cb7502e88bc84c607fb
   '@prisma/client': 3.13.0_prisma@3.13.0
   '@sindresorhus/is': 4.6.0
@@ -994,6 +996,15 @@ packages:
       '@babel/runtime': 7.17.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
+    dev: false
+
+  /@geist-ui/icons/1.0.1_react@17.0.2:
+    resolution: {integrity: sha512-W+ol1DOk9MNjY9IV0gKbhaKIjif6O+5wxM31CIUUAl6shjRjmwVPxVNFoaVJwiTp0Chp5BQyluHmCWaOOZQCtA==}
+    peerDependencies:
+      '@geist-ui/react': '>=1.0.0'
+      react: '>=16.13.0'
+    dependencies:
+      react: 17.0.2
     dev: false
 
   /@humanwhocodes/config-array/0.9.5:
