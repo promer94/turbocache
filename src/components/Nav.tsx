@@ -25,11 +25,6 @@ const Nav = () => {
           {data ? (
             <Image src={data!.user!.image ?? ''} alt="avatar" width={32} height={32} className="rounded-[16px]" ></Image>
           ) : <Image onClick={() => signIn()} src="https://avatars.githubusercontent.com/t/2824157" alt="avatar" width={32} height={32} className="rounded-[16px]" />}
-          <Link href="https://github.com/promer94/turbocache">
-            <a title='Turbocache GitHub Repository' target="_blank">
-              <GitHubIcon size={32} />
-            </a>
-          </Link>
         </div>
       </nav>
     </div>
