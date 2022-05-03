@@ -1,6 +1,8 @@
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import Image from 'next/image'
+import GitHubIcon from '@geist-ui/icons/github';
+
 const Nav = () => {
   const { data } = useSession<true>();
   return (
@@ -128,7 +130,12 @@ const Nav = () => {
           </Link>
         </div>
         <div className="flex-1"></div>
-        <div className="flex-1 flex justify-end">
+        <div className="flex-1 flex items-center justify-end gap-4">
+          <Link href="https://github.com/promer94/turbocache">
+            <a title='Turbocache GitHub Repository' target="_blank">
+              <GitHubIcon />
+            </a>
+          </Link>
           {data ? (
             <Image src={data!.user!.image ?? ''} alt="avatar" width={28} height={28} className="rounded-[14px]"></Image>
           ) : null}
