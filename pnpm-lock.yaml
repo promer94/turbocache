@@ -31,9 +31,9 @@ dependencies:
   '@aws-sdk/client-s3': 3.81.0
   '@aws-sdk/lib-storage': 3.81.0_n265mp6qg7rh3mruguy27tqnwq
   '@aws-sdk/s3-request-presigner': 3.81.0
-  '@geist-ui/core': 2.3.8_react-dom@17.0.2+react@17.0.2
+  '@geist-ui/core': 2.3.8_sfoxds7t5ydpegc3knd667wn6m
   '@geist-ui/icons': 1.0.1_react@17.0.2
-  '@next-auth/prisma-adapter': 1.0.3_a6dc61f73c506cb7502e88bc84c607fb
+  '@next-auth/prisma-adapter': 1.0.3_u3ogd5z4kbwlouborc6ijrqh7m
   '@prisma/client': 3.13.0_prisma@3.13.0
   '@sindresorhus/is': 4.6.0
   consola: 2.15.3
