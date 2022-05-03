@@ -1,7 +1,6 @@
 import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import Image from 'next/image'
-import GitHubIcon from '@geist-ui/icons/github';
 
 const Nav = () => {
   const { data } = useSession<true>();
@@ -15,7 +14,7 @@ const Nav = () => {
       <nav className="flex max-w-[90rem] mx-auto items-center left-0 right-0 h-16 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
         <div className="flex-auto flex gap-4">
           <Link href="/">
-            <a className='text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600  text-center text-xl font-extrabold tracking-tighter'>
+            <a className='text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600  text-center text-3xl font-extrabold tracking-tighter'>
               Turbocache
             </a>
           </Link>
