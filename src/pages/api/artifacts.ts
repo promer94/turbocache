@@ -3,6 +3,7 @@ import { defaultApiHandler } from "../../service/handler";
 import { NextApiResponse } from "next";
 import { s3Storage } from "../../lib/s3-client";
 import { Artifact } from "../../types";
+import prisma from "../../lib/prisma";
 
 const handler = defaultApiHandler()
   .use(sessionMiddleWare())
@@ -23,8 +24,25 @@ const handler = defaultApiHandler()
             hash: _object.Key!.replace(new RegExp("^" + id + "\\/"), ""),
             size: _object.Size!,
             createdAt: _object.LastModified?.toISOString() ?? null,
+            hitTimes: 0,
           };
         }) ?? [];
+
+    const events = await prisma.eventItem.findMany({
+      where: {
+        hash: {
+          in: artifacts.map((artifact) => artifact.hash),
+        },
+        source: "REMOTE",
+        event: "HIT",
+      },
+    });
+
+    artifacts.forEach((artifact) => {
+      artifact.hitTimes = events.filter(
+        (event) => event.hash === artifact.hash
+      ).length;
+    });
 
     res.json({
       artifacts,

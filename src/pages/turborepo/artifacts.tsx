@@ -26,6 +26,7 @@ const Artifacts = () => {
               <h4 className="font-semibold text-lg mb-4">{artifact.hash}</h4>
               <p>Size: {prettyBytes(artifact.size)}</p>
               <p>Created at: {artifact.createdAt}</p>
+              <p>Hit: {artifact.hitTimes} times</p>
             </Card>
           ))}
         </div>

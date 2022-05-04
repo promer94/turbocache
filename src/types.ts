@@ -5,4 +5,5 @@ export type Artifact = {
    */
   size: number;
   createdAt: string | null;
+  hitTimes: number;
 };
