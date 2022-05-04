@@ -10,6 +10,7 @@ const Index = () => {
   const router = useRouter();
   const { copy } = useClipboard();
   const toast = useToasts();
+
   return (
     <div className='flex flex-col justify-center items-center h-full'>
       <Head>
@@ -78,3 +79,35 @@ const Index = () => {
 };
 
 export default Index;
+
+export async function getServerSideProps() {
+  /**
+   * If required components are not configured properly
+   * Redirect to setup guide page
+   */
+
+  const {
+    AWS_ACCESSKEY_ID,
+    AWS_ACCESSKEY_TOKEN,
+    AWS_S3_BUCKET,
+    AWS_S3_REGION
+  } = process.env
+
+  if (!(
+    AWS_ACCESSKEY_ID &&
+    AWS_ACCESSKEY_TOKEN &&
+    AWS_S3_BUCKET &&
+    AWS_S3_REGION
+  )) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/setup"
+      }
+    }
+  }
+
+  return {
+    props: {}
+  }
+}
