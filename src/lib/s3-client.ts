@@ -15,6 +15,20 @@ const keyId = process.env.AWS_ACCESSKEY_ID;
 const key = process.env.AWS_ACCESSKEY_TOKEN;
 const bucket = process.env.AWS_S3_BUCKET;
 
+/* using minio for development */
+const minioconfig =
+  process.env.NODE_ENV === "development"
+    ? {
+        endpoint: {
+          protocol: "http",
+          hostname: "127.0.0.1:9000",
+          path: "/",
+        },
+        forcePathStyle: true,
+      }
+    : {};
+
+
 const defaultOption = {
   region,
   credentials: {
@@ -22,7 +36,8 @@ const defaultOption = {
     accessKeyId: keyId,
   },
   bucket,
-  logger: logger
+  logger: logger,
+  ...minioconfig,
 };
 
 const createS3Client = (option = defaultOption) => new S3Client(option);

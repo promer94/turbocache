@@ -14,6 +14,7 @@ specifiers:
   '@types/react': 17.0.44
   autoprefixer: 10.4.7
   consola: 2.15.3
+  dotenv: ^16.0.0
   eslint: 8.14.0
   eslint-config-next: 12.1.5
   next: 12.1.5
@@ -48,6 +49,7 @@ devDependencies:
   '@types/node': 17.0.31
   '@types/react': 17.0.44
   autoprefixer: 10.4.7_postcss@8.4.13
+  dotenv: 16.0.0
   eslint: 8.14.0
   eslint-config-next: 12.1.5_ldpv3uesskyaguxpaa56hbtpeu
   postcss: 8.4.13
@@ -1663,6 +1665,11 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
+    dev: true
+
+  /dotenv/16.0.0:
+    resolution: {integrity: sha512-qD9WU0MPM4SWLPJy/r2Be+2WgQj8plChsyrCNQzW/0WjvcJQiKQJ9mH3ZgB3fxbUUxgc/11ZJ0Fi5KiimWGz2Q==}
+    engines: {node: '>=12'}
     dev: true
 
   /electron-to-chromium/1.4.129:
