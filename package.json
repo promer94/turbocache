@@ -17,9 +17,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "prisma generate && next build"
+    "deploy": "prisma generate && next build",
+    "bucket": "node -r dotenv/config scripts/s3.mjs"
   },
   "dependencies": {
+    "@aws-sdk/abort-controller": "^3.78.0",
     "@aws-sdk/client-s3": "3.81.0",
     "@aws-sdk/lib-storage": "3.81.0",
     "@aws-sdk/s3-request-presigner": "3.81.0",
@@ -42,7 +44,8 @@
     "@types/node": "17.0.31",
     "@types/react": "17.0.44",
     "autoprefixer": "10.4.7",
-    "eslint": "8.11.0",
+    "dotenv": "^16.0.0",
+    "eslint": "8.14.0",
     "eslint-config-next": "12.1.5",
     "postcss": "8.4.13",
     "tailwindcss": "3.0.24",

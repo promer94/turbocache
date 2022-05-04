@@ -1,6 +1,8 @@
 import { Badge, Snippet } from '@geist-ui/core';
 import { useGuideUrl } from '../../hooks/useGuideUrl';
 import { Layout } from '../../components/Layout';
+import { GetServerSideProps } from 'next';
+import { getServerSideSession } from '../../service/session';
 
 const Onboarding = () => {
   const { url, api } = useGuideUrl();
@@ -23,6 +25,16 @@ const Onboarding = () => {
 
   );
 };
-
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const [result, redirect] = await getServerSideSession(context)
+  if (redirect) {
+    return redirect
+  }
+  return {
+    props: {
+      session: result.session
+    }
+  }
+}
 Onboarding.getLayout = Layout
 export default Onboarding;

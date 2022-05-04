@@ -1,3 +1,4 @@
+import { Footer } from './Footer'
 import { Nav } from './Nav'
 
 export const Layout = (children: React.ReactNode) => {
@@ -7,6 +8,7 @@ export const Layout = (children: React.ReactNode) => {
       <div className='flex flex-col mx-auto py-16 min-w-[1000px]'>
         {children}
       </div>
+      <Footer></Footer>
     </div>
   )
 }

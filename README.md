@@ -27,7 +27,7 @@ AWS_ACCESSKEY_TOKEN=
 AWS_S3_BUCKET=
 AWS_S3_REGION=
 
-# Next-Auth
+# NextAuth
 NEXTAUTH_SECRET=
 NEXTAUTH_URL=
 
@@ -41,6 +41,30 @@ GITHUB_ID=
 
 ```bash
 pnpm install
+```
+
+### Setup mysql (optional)
+
+```bash
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 arm64v8/mysql:oracle
+```
+
+### Setup minio (optional)
+
+```bash
+docker run 
+  \\n  -p 9000:9000 
+  \\n  -p 9001:9001 
+  \\n  --name minio-local 
+  \\n  -e "MINIO_ROOT_USER=AKIAIOSFODNN7EXAMPLE" 
+  \\n  -e "MINIO_ROOT_PASSWORD=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" 
+  \\n  quay.io/minio/minio server /data --console-address ":9001"
+```
+
+### Setup butket for minin (optional)
+
+```bash
+pnpm bucket
 ```
 
 ### Setup Database
@@ -80,3 +104,7 @@ pnpm deploy
 - [AWS S3](https://aws.amazon.com/s3)
 
 - [Vercel](https://vercel.com)
+
+---
+
+[![Vercel](./public/powered-by-vercel.svg)](https://vercel.com?utm_source=promer94&utm_campaign=oss)
