@@ -5,7 +5,7 @@ export const Layout = (children: React.ReactNode) => {
   return (
     <div className='flex flex-col min-h-full min-w-full'>
       <Nav></Nav>
-      <div className='flex flex-col mx-auto py-16 min-w-'>
+      <div className='flex flex-col mx-auto py-16 min-w-[1000px]'>
         {children}
       </div>
       <Footer></Footer>

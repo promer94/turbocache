@@ -1,5 +1,6 @@
 import {
   GetObjectCommand,
+  ListObjectsV2Command,
   PutObjectCommand,
   S3Client,
 } from "@aws-sdk/client-s3";
@@ -7,8 +8,8 @@ import { Upload } from "@aws-sdk/lib-storage";
 import { Readable } from "stream";
 import { TurboObjectStorage } from "./storage";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { Consola } from 'consola';
-import { logger } from './logger';
+import { Consola } from "consola";
+import { logger } from "./logger";
 
 const region = process.env.AWS_S3_REGION;
 const keyId = process.env.AWS_ACCESSKEY_ID;
@@ -51,7 +52,7 @@ export class S3Storage implements TurboObjectStorage {
       accessKeyId: string;
     };
     bucket: string;
-    logger: Consola
+    logger: Consola;
   };
   constructor(options = defaultOption) {
     this.options = options;
@@ -83,6 +84,14 @@ export class S3Storage implements TurboObjectStorage {
     });
     // @ts-ignore
     return getSignedUrl(this.client, command, { expiresIn: 3600 });
+  }
+  async list(path: string) {
+    const command = new ListObjectsV2Command({
+      Prefix: path,
+      Bucket: this.options.bucket,
+    });
+
+    return this.client.send(command).then((output) => output.Contents);
   }
 }
 
