@@ -4,7 +4,7 @@ import { Layout } from '../../components/Layout';
 import { getServerSideSession } from '../../service/session';
 
 const Token = ({ redirectUrl = 'http://127.0.0.1:9789' }: { redirectUrl: string }) => (
-  <div className="flex flex-col">
+  <div className="flex flex-col items-center">
     <div className="inline-flex justify-center items-center text-[40px] text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500 ">
       Connect to Turbocache
     </div>
