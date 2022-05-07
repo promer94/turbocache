@@ -21,7 +21,7 @@ const Success = () => {
         Build your Turborepo
       </div>
       <div className="mt-[16px]"></div>
-      <Snippet text={`npx turbo run build --preflight`} />
+      <Snippet text="npx turbo run build --remote-only --preflight" />
     </div>
 
   );
