@@ -12,6 +12,7 @@ const onBorad = async ({ id, name }: { id: string; name?: string | null }) => {
   if (!team) {
     return prisma.team.create({
       data: {
+        id,
         name,
         users: {
           connect: {
