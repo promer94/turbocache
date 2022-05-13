@@ -46,19 +46,20 @@ pnpm install
 ### Setup mysql (optional)
 
 ```bash
-docker run --name mysql -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 arm64v8/mysql:oracle
+docker run --name mysql -d -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 arm64v8/mysql:oracle
 ```
 
 ### Setup minio (optional)
 
 ```bash
-docker run 
-  \\n  -p 9000:9000 
-  \\n  -p 9001:9001 
-  \\n  --name minio-local 
-  \\n  -e "MINIO_ROOT_USER=AKIAIOSFODNN7EXAMPLE" 
-  \\n  -e "MINIO_ROOT_PASSWORD=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" 
-  \\n  quay.io/minio/minio server /data --console-address ":9001"
+docker run \
+   -d \
+   -p 9000:9000 \
+   -p 9001:9001 \
+   --name minio \
+   -e "MINIO_ROOT_USER=AKIAIOSFODNN7EXAMPLE" \
+   -e "MINIO_ROOT_PASSWORD=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" \
+   quay.io/minio/minio server /data --console-address ":9001"
 ```
 
 ### Setup butket for minin (optional)

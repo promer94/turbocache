@@ -16,20 +16,24 @@ const keyId = process.env.AWS_ACCESSKEY_ID;
 const key = process.env.AWS_ACCESSKEY_TOKEN;
 const bucket = process.env.AWS_S3_BUCKET;
 
-/* using minio for development */
-const minioconfig =
-  process.env.NODE_ENV === "development"
-    ? {
-        endpoint: {
-          protocol: "http",
-          hostname: "127.0.0.1",
-          port: 9000,
-          path: "/",
-        },
-        forcePathStyle: true,
-      }
-    : {};
+const minioconfig = {
+  endpoint: {
+    protocol: "http",
+    hostname: "127.0.0.1",
+    port: 9000,
+    path: "/",
+  },
+  forcePathStyle: true,
+};
 
+const minioSignConfig = {
+  endpoint: {
+    protocol: "http",
+    hostname: "127.0.0.1:9000",
+    path: "/",
+  },
+  forcePathStyle: true,
+};
 
 const defaultOption = {
   region,
@@ -38,14 +42,14 @@ const defaultOption = {
     accessKeyId: keyId,
   },
   bucket,
-  logger: logger,
-  ...minioconfig,
+  logger: logger
 };
 
 const createS3Client = (option = defaultOption) => new S3Client(option);
 
-export class S3Storage implements TurboObjectStorage {
+export class MinioStorage implements TurboObjectStorage {
   public client: S3Client;
+  public signClient: S3Client;
   public options: {
     region: string;
     credentials: {
@@ -57,7 +61,8 @@ export class S3Storage implements TurboObjectStorage {
   };
   constructor(options = defaultOption) {
     this.options = options;
-    this.client = createS3Client(options);
+    this.client = createS3Client(Object.assign(options, minioconfig));
+    this.signClient = createS3Client(Object.assign(options, minioSignConfig));
   }
   async upload(path: string, file: Readable): Promise<any> {
     const uploads3 = new Upload({
@@ -69,9 +74,6 @@ export class S3Storage implements TurboObjectStorage {
         Bucket: this.options.bucket,
       },
     });
-    uploads3.on("httpUploadProgress", (progress) => {
-      console.log(progress)
-    });
     return uploads3.done();
   }
   async signedUploadUrl(path: string): Promise<any> {
@@ -79,15 +81,14 @@ export class S3Storage implements TurboObjectStorage {
       Key: path,
       Bucket: this.options.bucket,
     });
-    return getSignedUrl(this.client, command, { expiresIn: 3600 });
+    return getSignedUrl(this.signClient, command, { expiresIn: 3600 });
   }
   async download(path: string): Promise<string> {
     const command = new GetObjectCommand({
       Key: path,
       Bucket: this.options.bucket,
     });
-    // @ts-ignore
-    return getSignedUrl(this.client, command, { expiresIn: 3600 });
+    return getSignedUrl(this.signClient, command, { expiresIn: 3600 });
   }
   async list(path: string) {
     const command = new ListObjectsV2Command({
@@ -99,6 +100,6 @@ export class S3Storage implements TurboObjectStorage {
   }
 }
 
-const s3Storage = new S3Storage(defaultOption);
+const minioStorage = new MinioStorage(defaultOption);
 
-export { s3Storage };
+export { minioStorage };

@@ -7,7 +7,9 @@ import {
 } from "../../../../service/turbo-cache";
 import { s3Storage } from "../../../../lib/s3-client";
 import { defaultApiHandler } from "../../../../service/handler";
+import { minioStorage } from '../../../../lib/minio-client';
 
+const storage = process.env.NODE_ENV === 'development' ? minioStorage : s3Storage
 const hanlder = defaultApiHandler()
   .use(turboTokenMiddleWare())
   .use(turboTeamMiddleWare())
@@ -16,11 +18,11 @@ const hanlder = defaultApiHandler()
     try {
       const method = req.headers["access-control-request-method"];
       if (method && method.toLowerCase().includes("put")) {
-        const url = await s3Storage.signedUploadUrl(req.cache);
+        const url = await storage.signedUploadUrl(req.cache);
         res.setHeader("location", url);
         res.status(200).end("");
       } else if (method && method.toLowerCase().includes("get")) {
-        const url = await s3Storage.download(req.cache);
+        const url = await storage.download(req.cache);
         res.setHeader("location", url);
         res.status(200).end("");
       } else {
@@ -34,7 +36,7 @@ const hanlder = defaultApiHandler()
   })
   .get<CacheRequst, NextApiResponse>(async (req, res) => {
     try {
-      const url = await s3Storage.download(req.cache);
+      const url = await storage.download(req.cache);
       res.setHeader("location", url);
       res.status(307);
       res.end("");
@@ -45,7 +47,7 @@ const hanlder = defaultApiHandler()
   })
   .put<CacheRequst, NextApiResponse>(async (req, res) => {
     try {
-      await s3Storage.upload(req.cache, req);
+      await storage.upload(req.cache, req);
       res.status(204).end("");
     } catch (e) {
       req.logger.error(e);
