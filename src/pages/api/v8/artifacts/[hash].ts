@@ -1,6 +1,5 @@
 import { NextApiResponse, PageConfig } from "next";
 import {
-  CacheRequst,
   turboCacheMiddleWare,
   turboTeamMiddleWare,
   turboTokenMiddleWare,
@@ -8,21 +7,23 @@ import {
 import { s3Storage } from "../../../../lib/s3-client";
 import { defaultApiHandler } from "../../../../service/handler";
 import { minioStorage } from '../../../../lib/minio-client';
+import { storageMiddleware, StorageRequest } from '../../../../service/storage'
 
 const storage = process.env.NODE_ENV === 'development' ? minioStorage : s3Storage
 const hanlder = defaultApiHandler()
   .use(turboTokenMiddleWare())
   .use(turboTeamMiddleWare())
   .use(turboCacheMiddleWare())
-  .options<CacheRequst, NextApiResponse>(async (req, res) => {
+  .use(storageMiddleware(storage))
+  .options<StorageRequest, NextApiResponse>(async (req, res) => {
     try {
       const method = req.headers["access-control-request-method"];
       if (method && method.toLowerCase().includes("put")) {
-        const url = await storage.signedUploadUrl(req.cache);
+        const url = await req.storage.signedUploadUrl(req.cache);
         res.setHeader("location", url);
         res.status(200).end("");
       } else if (method && method.toLowerCase().includes("get")) {
-        const url = await storage.download(req.cache);
+        const url = await req.storage.download(req.cache);
         res.setHeader("location", url);
         res.status(200).end("");
       } else {
@@ -34,9 +35,9 @@ const hanlder = defaultApiHandler()
       res.status(404).end("");
     }
   })
-  .get<CacheRequst, NextApiResponse>(async (req, res) => {
+  .get<StorageRequest, NextApiResponse>(async (req, res) => {
     try {
-      const url = await storage.download(req.cache);
+      const url = await req.storage.download(req.cache);
       res.setHeader("location", url);
       res.status(307);
       res.end("");
@@ -45,9 +46,9 @@ const hanlder = defaultApiHandler()
       res.status(404).end("");
     }
   })
-  .put<CacheRequst, NextApiResponse>(async (req, res) => {
+  .put<StorageRequest, NextApiResponse>(async (req, res) => {
     try {
-      await storage.upload(req.cache, req);
+      await req.storage.upload(req.cache, req);
       res.status(204).end("");
     } catch (e) {
       req.logger.error(e);
