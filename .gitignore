@@ -43,3 +43,4 @@ yarn-error.log*
 **/supabase/.temp
 **/supabase/.env
 .turbo
+.pnpm-store/**
