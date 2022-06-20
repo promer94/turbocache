@@ -77,7 +77,9 @@ const Index = () => {
     </div>
   );
 };
-
+export const config = {
+  runtime: 'edge',
+}
 export default Index;
 
 export async function getServerSideProps() {

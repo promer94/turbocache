@@ -59,7 +59,9 @@ const Setup = ({ isS3Configured }: SetupProps) => {
 Setup.getLayout = Layout;
 
 export default Setup;
-
+export const config = {
+  runtime: 'edge',
+}
 export async function getServerSideProps() {
   const {
     AWS_ACCESSKEY_ID,
