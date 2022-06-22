@@ -71,7 +71,7 @@ export async function getServerSideProps() {
   } = process.env;
 
   const isS3Configured =
-    AWS_ACCESSKEY_ID && AWS_ACCESSKEY_TOKEN && AWS_S3_BUCKET && AWS_S3_REGION;
+    Boolean(AWS_ACCESSKEY_ID && AWS_ACCESSKEY_TOKEN && AWS_S3_BUCKET && AWS_S3_REGION);
 
   return {
     props: {
