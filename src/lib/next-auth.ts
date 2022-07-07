@@ -1,4 +1,4 @@
-import NextAuth, { getServerSession, NextAuthOptions } from "next-auth";
+import NextAuth, { unstable_getServerSession as getServerSession, NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from './prisma';
@@ -33,7 +33,7 @@ export const serverSession = (
         res: NextApiResponse;
       }
 ) => {
-  return getServerSession(context, option)
+  return getServerSession(context.req, context.res, option);
 }
 const NextAuthHandler = NextAuth(option);
 export default NextAuthHandler
