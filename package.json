@@ -17,7 +17,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "prisma generate && next build",
+    "online": "prisma generate && next build",
     "bucket": "node -r dotenv/config scripts/s3.mjs"
   },
   "dependencies": {
