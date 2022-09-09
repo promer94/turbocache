@@ -1,12 +1,13 @@
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
+import type { Session } from 'next-auth';
 import { SWRConfig } from 'swr';
 import '../styles/tailwind.css';
 import '../styles/main.css'
 import { GeistProvider } from '@geist-ui/core';
 import Head from 'next/head';
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps<{ session: Session }>) {
   /** @ts-expect-error */
   const getLayout = Component.getLayout || ((page) => page)
   return (
@@ -27,7 +28,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         <meta property="og:image" content="https://i.microlink.io/https%3A%2F%2Fcards.microlink.io%2F%3Fpreset%3Dcontentz%26description%3DA%2Bsimple%2Bremote%2Bcache%2Bserver%2Bfor%2BTurborepo%26title%3DTurbocache" />
       </Head>
       <SessionProvider session={session}>
-        <SWRConfig 
+        <SWRConfig
           value={{
             refreshInterval: 3000,
             fetcher: (resource, init) => fetch(resource, init).then(res => res.json())
