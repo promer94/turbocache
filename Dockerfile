@@ -1,11 +1,13 @@
 # Install dependencies only when needed
-FROM node:18-bullseye AS deps
+ARG NODE_VERSION=18-bullseye
+
+FROM node:${NODE_VERSION} AS deps
 WORKDIR /app
 COPY pnpm-lock.yaml* ./
 RUN yarn global add pnpm
 RUN --mount=type=cache,target=/root/.local/share/pnpm/store pnpm fetch
 
-FROM node:18-bullseye AS builder
+FROM node:${NODE_VERSION} AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -16,7 +18,7 @@ RUN pnpm install --offline
 RUN pnpm prebuild
 RUN --mount=type=cache,target=/app/.next/cache pnpm build
 
-FROM node:18-bullseye AS runner
+FROM node:${NODE_VERSION} AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
