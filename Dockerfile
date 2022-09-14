@@ -5,7 +5,8 @@ FROM node:${NODE_VERSION} AS deps
 WORKDIR /app
 COPY pnpm-lock.yaml* ./
 RUN yarn global add pnpm
-RUN --mount=type=cache,target=/root/.local/share/pnpm/store pnpm fetch
+# RUN --mount=type=cache,target=/root/.local/share/pnpm/store pnpm fetch
+RUN pnpm fetch
 
 FROM node:${NODE_VERSION} AS builder
 WORKDIR /app
@@ -16,7 +17,8 @@ ENV NEXT_PUBLIC_OUTPUTSTANDALONE 1
 RUN yarn global add pnpm
 RUN pnpm install --offline
 RUN pnpm prebuild
-RUN --mount=type=cache,target=/app/.next/cache pnpm build
+# RUN --mount=type=cache,target=/app/.next/cache pnpm build
+RUN pnpm build
 
 FROM node:${NODE_VERSION} AS runner
 WORKDIR /app
