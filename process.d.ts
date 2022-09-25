@@ -9,6 +9,7 @@ declare namespace NodeJS {
     AWS_ACCESSKEY_TOKEN: string;
     AWS_S3_REGION: string;
     AWS_S3_BUCKET: string;
+    AWS_S3_ENDPOINT: string;
     NEXT_PUBLIC_OUTPUTSTANDALONE: string
   }
 }

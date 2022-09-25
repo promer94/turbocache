@@ -15,20 +15,22 @@ const region = process.env.AWS_S3_REGION;
 const keyId = process.env.AWS_ACCESSKEY_ID;
 const key = process.env.AWS_ACCESSKEY_TOKEN;
 const bucket = process.env.AWS_S3_BUCKET;
-
+const endpoint = process.env.AWS_S3_ENDPOINT
 /* using minio for development */
 const minioconfig =
   process.env.NODE_ENV === "development"
     ? {
-        endpoint: {
-          protocol: "http",
-          hostname: "127.0.0.1",
-          port: 9000,
-          path: "/",
-        },
-        forcePathStyle: true,
-      }
-    : {};
+      endpoint: {
+        protocol: "http",
+        hostname: "127.0.0.1",
+        port: 9000,
+        path: "/",
+      },
+      forcePathStyle: true,
+    }
+    : {
+      ...(endpoint && { endpoint }),
+    };
 
 
 const defaultOption = {
