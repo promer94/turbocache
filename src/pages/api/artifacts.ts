@@ -43,7 +43,6 @@ const handler = defaultApiHandler()
         (event) => event.hash === artifact.hash
       ).length;
     });
-
     res.json({
       artifacts,
     });

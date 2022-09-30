@@ -8,8 +8,8 @@ import { Upload } from "@aws-sdk/lib-storage";
 import { Readable } from "stream";
 import { TurboObjectStorage } from "./storage";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { Consola } from "consola";
 import { logger } from "./logger";
+import { Logger } from 'pino';
 
 const region = process.env.AWS_S3_REGION;
 const keyId = process.env.AWS_ACCESSKEY_ID;
@@ -40,7 +40,7 @@ const defaultOption = {
     accessKeyId: keyId,
   },
   bucket,
-  logger: logger,
+  logger: logger.child({ scope: 'S3Client' }),
   ...minioconfig,
 };
 
@@ -55,10 +55,12 @@ export class S3Storage implements TurboObjectStorage {
       accessKeyId: string;
     };
     bucket: string;
-    logger: Consola;
+    logger: Logger;
   };
   constructor(options = defaultOption) {
-    this.options = options;
+    this.options = Object.assign({}, defaultOption, options);
+    const { logger, ...clientOptions } = this.options;
+    this.options.logger.debug(clientOptions, "S3Storage options");
     this.client = createS3Client(options);
   }
   async upload(path: string, file: Readable): Promise<any> {
@@ -72,7 +74,7 @@ export class S3Storage implements TurboObjectStorage {
       },
     });
     uploads3.on("httpUploadProgress", (progress) => {
-      console.log(progress)
+      this.options.logger.debug({ progress }, "S3 upload progress");
     });
     return uploads3.done();
   }

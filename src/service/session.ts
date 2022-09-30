@@ -17,14 +17,14 @@ export const getServerSideSession = async (
 ): Promise<
   | [{ session: Session; user: User }, null]
   | [
-      null,
-      {
-        redirect: {
-          destination: string;
-          permanent: boolean;
-        };
-      }
-    ]
+    null,
+    {
+      redirect: {
+        destination: string;
+        permanent: boolean;
+      };
+    }
+  ]
 > => {
   const session = await serverSession(context);
   if (!session) {
@@ -79,7 +79,7 @@ export const sessionMiddleWare: () => Middleware<
       }
     }
   } catch (e) {
-    req.logger.error(e);
+    req.logger.error({ error: e }, 'sessionMiddleWare Error');
     res.status(500).send("Internal Error");
   }
 };

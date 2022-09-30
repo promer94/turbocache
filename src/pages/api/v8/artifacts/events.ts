@@ -25,7 +25,7 @@ const hanlder = defaultApiHandler()
         });
       }
     } catch (e) {
-      req.logger.error(e);
+      req.logger.error({ error: e }, "Events Middleware Error");
     }
     res.status(200).send("");
   });

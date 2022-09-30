@@ -31,7 +31,7 @@ const hanlder = defaultApiHandler()
         res.status(200).end("");
       }
     } catch (e) {
-      req.logger.error(e);
+      req.logger.error({ error: e }, 'Preflight Middleware Error');
       res.status(404).end("");
     }
   })
@@ -42,7 +42,6 @@ const hanlder = defaultApiHandler()
       res.status(307);
       res.end("");
     } catch (e) {
-      req.logger.error(e);
       res.status(404).end("");
     }
   })
@@ -51,7 +50,7 @@ const hanlder = defaultApiHandler()
       await req.storage.upload(req.cache, req);
       res.status(204).end("");
     } catch (e) {
-      req.logger.error(e);
+      req.logger.error({ error: e }, 'Artifacts Upload Error');
       res.status(504).end("");
     }
   });

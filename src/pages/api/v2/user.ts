@@ -27,7 +27,7 @@ const user = async (req: LoggerRequest, res: NextApiResponse) => {
       });
     }
   } catch (e) {
-    req.logger.error(e);
+    req.logger.error({error: e}, 'User Middleware Error');
   }
 };
 

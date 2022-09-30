@@ -16,14 +16,7 @@ const option: NextAuthOptions = {
   pages: {
     newUser: "/api/onboarding",
   },
-  secret: process.env.NEXTAUTH_SECRET,
-  logger: {
-    warn: logger.warn,
-    error: (code, error) => {
-      logger.error(error)
-    },
-    debug: logger.debug
-  }
+  secret: process.env.NEXTAUTH_SECRET
 };
 export const serverSession = (
   context:

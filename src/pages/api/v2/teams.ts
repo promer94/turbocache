@@ -21,8 +21,6 @@ const teams = async (req: LoggerRequest, res: NextApiResponse) => {
           {
             id: `team_${info.teamId}`,
             name: "default team",
-            /*
-            membership: "OWNER", */
           },
         ],
         pagination: {
@@ -33,7 +31,7 @@ const teams = async (req: LoggerRequest, res: NextApiResponse) => {
       });
     }
   } catch (e) {
-    req.logger.error(e)
+    req.logger.error({ error: e }, 'Teams Middleware Error');
     res.status(500).end('')
   }
 };
