@@ -8,8 +8,6 @@ import { Upload } from "@aws-sdk/lib-storage";
 import { Readable } from "stream";
 import { TurboObjectStorage } from "./storage";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { logger } from "./logger";
-import { Logger } from 'pino';
 
 const region = process.env.AWS_S3_REGION;
 const keyId = process.env.AWS_ACCESSKEY_ID;
@@ -41,8 +39,7 @@ const defaultOption = {
     secretAccessKey: key,
     accessKeyId: keyId,
   },
-  bucket,
-  logger: logger.child({ scope: 'S3Client' }),
+  bucket
 };
 
 const createS3Client = (option = defaultOption) => new S3Client(option);
@@ -57,7 +54,6 @@ export class MinioStorage implements TurboObjectStorage {
       accessKeyId: string;
     };
     bucket: string;
-    logger: Logger;
   };
   constructor(options = defaultOption) {
     this.options = options;
@@ -95,13 +91,8 @@ export class MinioStorage implements TurboObjectStorage {
       Prefix: path,
       Bucket: this.options.bucket,
     });
-    try {
-      const result = await this.client.send(command).then((output) => output.Contents);
-      return result
-    } catch (e) {
-      this.options.logger.error({ error: e }, 'list error');
-      throw (e)
-    }
+
+    return this.client.send(command).then((output) => output.Contents);
   }
 }
 
