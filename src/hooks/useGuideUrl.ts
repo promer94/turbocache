@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { isServer } from "../lib/env";
 
-export const useGuideUrl = () => {
+export const useGuideUrl = ({ host }: { host: string }) => {
   const [config] = useState(() => {
     if (isServer) {
       return {
-        url: process.env.NEXTAUTH_URL,
-        api: `${process.env.NEXTAUTH_URL}/api`,
+        url: host,
+        api: `${host}/api`,
       };
     }
     const port = location.port !== "" ? `:${location.port}` : location.port;

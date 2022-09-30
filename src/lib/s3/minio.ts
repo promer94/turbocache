@@ -6,13 +6,9 @@ import {
 } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 import { Readable } from "stream";
-import { TurboObjectStorage } from "./storage";
+import { TurboObjectStorage } from "../storage";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-
-const region = process.env.AWS_S3_REGION;
-const keyId = process.env.AWS_ACCESSKEY_ID;
-const key = process.env.AWS_ACCESSKEY_TOKEN;
-const bucket = process.env.AWS_S3_BUCKET;
+import { defaultS3Config, S3StorageOptions } from './config';
 
 const minioconfig = {
   endpoint: {
@@ -33,32 +29,16 @@ const minioSignConfig = {
   forcePathStyle: true,
 };
 
-const defaultOption = {
-  region,
-  credentials: {
-    secretAccessKey: key,
-    accessKeyId: keyId,
-  },
-  bucket
-};
 
-const createS3Client = (option = defaultOption) => new S3Client(option);
 
 export class MinioStorage implements TurboObjectStorage {
   public client: S3Client;
   public signClient: S3Client;
-  public options: {
-    region: string;
-    credentials: {
-      secretAccessKey: string;
-      accessKeyId: string;
-    };
-    bucket: string;
-  };
-  constructor(options = defaultOption) {
-    this.options = options;
-    this.client = createS3Client(Object.assign(options, minioconfig));
-    this.signClient = createS3Client(Object.assign(options, minioSignConfig));
+  public options: S3StorageOptions
+  constructor(options?: S3StorageOptions) {
+    this.options = Object.assign(defaultS3Config, minioconfig, options)
+    this.client = new S3Client(Object.assign(defaultS3Config, minioconfig, options));
+    this.signClient = new S3Client(Object.assign(defaultS3Config, minioSignConfig, options));
   }
   async upload(path: string, file: Readable): Promise<any> {
     const uploads3 = new Upload({
@@ -96,6 +76,6 @@ export class MinioStorage implements TurboObjectStorage {
   }
 }
 
-const minioStorage = new MinioStorage(defaultOption);
+const minio = new MinioStorage();
 
-export { minioStorage };
+export { minio };

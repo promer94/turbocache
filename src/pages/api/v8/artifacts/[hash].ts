@@ -4,12 +4,12 @@ import {
   turboTeamMiddleWare,
   turboTokenMiddleWare,
 } from "../../../../service/turbo-cache";
-import { s3Storage } from "../../../../lib/s3-client";
 import { defaultApiHandler } from "../../../../service/handler";
-import { minioStorage } from '../../../../lib/minio-client';
 import { storageMiddleware, StorageRequest } from '../../../../service/storage'
+import { S3 } from '../../../../lib/s3/aws';
+import { minio } from '../../../../lib/s3/minio';
 
-const storage = process.env.NODE_ENV === 'development' ? minioStorage : s3Storage
+const storage = process.env.NODE_ENV === 'development' ? minio : S3
 const hanlder = defaultApiHandler()
   .use(turboTokenMiddleWare())
   .use(turboTeamMiddleWare())

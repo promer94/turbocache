@@ -39,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   return {
     props: {
-      session: result.session
+      session: result.session,
     }
   }
 }
