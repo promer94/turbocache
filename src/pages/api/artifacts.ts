@@ -1,7 +1,7 @@
 import { sessionMiddleWare, UserRequest } from "../../service/session";
 import { defaultApiHandler } from "../../service/handler";
 import { NextApiResponse } from "next";
-import { s3Storage } from "../../lib/s3-client";
+import { S3 } from "../../lib/s3/aws";
 import { Artifact } from "../../types";
 import prisma from "../../lib/prisma";
 
@@ -14,7 +14,7 @@ const handler = defaultApiHandler()
   .get<UserRequest, NextApiResponse>(async (req, res) => {
     const { id } = req.user;
     const artifacts: Artifact[] =
-      (await s3Storage.list(id))
+      (await S3.list(id))
         // Order by last modified time desc
         ?.sort(
           (o1, o2) => o2.LastModified!.valueOf() - o1.LastModified!.valueOf()
