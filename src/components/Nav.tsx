@@ -13,10 +13,8 @@ const Nav = () => {
       </div>
       <nav className="flex max-w-[90rem] mx-auto items-center left-0 right-0 h-16 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]">
         <div className="flex-auto flex gap-4">
-          <Link href="/">
-            <a className='text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600  text-center text-3xl font-extrabold tracking-tighter'>
-              Turbocache
-            </a>
+          <Link className='text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600  text-center text-3xl font-extrabold tracking-tighter' href="/">
+            Turbocache
           </Link>
         </div>
         <div className="flex-1"></div>

@@ -12,7 +12,7 @@ import { defaultS3Config, S3StorageOptions } from './config';
 
 const minioconfig = {
   endpoint: {
-    protocol: "http",
+    protocol: "http:",
     hostname: "127.0.0.1",
     port: 9000,
     path: "/",
@@ -22,7 +22,7 @@ const minioconfig = {
 
 const minioSignConfig = {
   endpoint: {
-    protocol: "http",
+    protocol: "http:",
     hostname: "127.0.0.1:9000",
     path: "/",
   },
