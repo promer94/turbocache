@@ -12,6 +12,7 @@ specifiers:
   '@sindresorhus/is': 5.3.0
   '@types/node': 18.14.6
   '@types/react': 18.0.28
+  '@vercel/analytics': ^0.1.11
   autoprefixer: 10.4.13
   consola: 2.15.3
   dotenv: 16.0.3
@@ -42,6 +43,7 @@ dependencies:
   '@next-auth/prisma-adapter': 1.0.5_knaw3qxw4zwoiwojd3fn43zthi
   '@prisma/client': 4.11.0_prisma@4.11.0
   '@sindresorhus/is': 5.3.0
+  '@vercel/analytics': 0.1.11_react@18.2.0
   consola: 2.15.3
   next: 13.2.3_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.20.1_nvzgbose6yf6w7ijjprgspqefi
@@ -1674,6 +1676,14 @@ packages:
       '@typescript-eslint/types': 5.54.0
       eslint-visitor-keys: 3.3.0
     dev: true
+
+  /@vercel/analytics/0.1.11_react@18.2.0:
+    resolution: {integrity: sha512-mj5CPR02y0BRs1tN3oZcBNAX9a8NxsIUl9vElDPcqxnMfP0RbRc9fI9Ud7+QDg/1Izvt5uMumsr+6YsmVHcyuw==}
+    peerDependencies:
+      react: ^16.8||^17||^18
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@vitest/expect/0.29.2:
     resolution: {integrity: sha512-wjrdHB2ANTch3XKRhjWZN0UueFocH0cQbi2tR5Jtq60Nb3YOSmakjdAvUa2JFBu/o8Vjhj5cYbcMXkZxn1NzmA==}

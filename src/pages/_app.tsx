@@ -6,6 +6,7 @@ import '../styles/tailwind.css';
 import '../styles/main.css'
 import { GeistProvider } from '@geist-ui/core';
 import Head from 'next/head';
+import { Analytics } from '@vercel/analytics/react';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps<{ session: Session }>) {
   /** @ts-expect-error */
@@ -27,6 +28,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps<{ s
         <meta name="twitter:image" content="https://i.microlink.io/https%3A%2F%2Fcards.microlink.io%2F%3Fpreset%3Dcontentz%26description%3DA%2Bsimple%2Bremote%2Bcache%2Bserver%2Bfor%2BTurborepo%26title%3DTurbocache" />
         <meta property="og:image" content="https://i.microlink.io/https%3A%2F%2Fcards.microlink.io%2F%3Fpreset%3Dcontentz%26description%3DA%2Bsimple%2Bremote%2Bcache%2Bserver%2Bfor%2BTurborepo%26title%3DTurbocache" />
       </Head>
+      <Analytics />
       <SessionProvider session={session}>
         <SWRConfig
           value={{
