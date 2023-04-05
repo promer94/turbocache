@@ -1,15 +1,19 @@
-import { Button } from '@geist-ui/core';
-import { GetServerSideProps } from 'next';
-import { Layout } from '../../components/Layout';
-import { getServerSideSession } from '../../service/session';
+import { Button } from '@geist-ui/core'
+import { GetServerSideProps } from 'next'
+import { Layout } from '../../components/Layout'
+import { getServerSideSession } from '../../service/session'
 
-const Token = ({ redirectUrl = 'http://127.0.0.1:9789' }: { redirectUrl: string }) => (
+const Token = ({
+  redirectUrl = 'http://127.0.0.1:9789',
+}: {
+  redirectUrl: string
+}) => (
   <div className="flex flex-col items-center">
-    <div className="inline-flex justify-center items-center text-[40px] text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500 ">
+    <div className="inline-flex items-center justify-center bg-gradient-to-r from-red-500 to-blue-500 bg-clip-text text-[40px] text-transparent ">
       Connect to Turbocache
     </div>
     <div className="mt-[70px]"></div>
-    <div className="w-[480px] flex justify-center items-center">
+    <div className="flex w-[480px] items-center justify-center">
       <Button
         shadow
         icon="🔑"
@@ -23,15 +27,15 @@ const Token = ({ redirectUrl = 'http://127.0.0.1:9789' }: { redirectUrl: string 
           })
             .then((v) => v.json())
             .then((v) => {
-              window.location.href = `${redirectUrl}?token=${v.token}`;
-            });
+              window.location.href = `${redirectUrl}?token=${v.token}`
+            })
         }}
       >
         Authorize
       </Button>
     </div>
   </div>
-);
+)
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const [result, redirect] = await getServerSideSession(context)
   if (redirect) {
@@ -40,8 +44,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       session: result.session,
-    }
+    },
   }
 }
 Token.getLayout = Layout
-export default Token;
+export default Token

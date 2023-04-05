@@ -1,19 +1,19 @@
-import { Card, Code } from "@geist-ui/core";
-import CheckInCircle from "@geist-ui/icons/checkInCircle";
-import { Layout } from "../components/Layout";
+import { Card, Code } from '@geist-ui/core'
+import CheckInCircle from '@geist-ui/icons/checkInCircle'
+import { Layout } from '../components/Layout'
 
 type SetupProps = {
-  isS3Configured: boolean;
-};
+  isS3Configured: boolean
+}
 /**
  * TODO use mdx for article pages
  */
 const Setup = ({ isS3Configured }: SetupProps) => {
-  const isEverythingConfigured = isS3Configured;
+  const isEverythingConfigured = isS3Configured
 
   return (
     <div className="min-w-[500px]">
-      <h1 className="text-[40px] inline-flex justify-center text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500 mb-[16px]">
+      <h1 className="mb-[16px] inline-flex justify-center bg-gradient-to-r from-red-500 to-blue-500 bg-clip-text text-[40px] text-transparent">
         Setup
       </h1>
       {isEverythingConfigured ? (
@@ -25,13 +25,13 @@ const Setup = ({ isS3Configured }: SetupProps) => {
 
       {isS3Configured ? (
         <Card>
-          <h2 className="text-xl text-black font-medium">
-            <CheckInCircle className="inline mr-1" /> Configure object storage
+          <h2 className="text-xl font-medium text-black">
+            <CheckInCircle className="mr-1 inline" /> Configure object storage
           </h2>
         </Card>
       ) : (
         <Card shadow>
-          <h2 className="text-xl text-black font-medium mb-[16px]">
+          <h2 className="mb-[16px] text-xl font-medium text-black">
             Configure object storage
           </h2>
 
@@ -53,12 +53,12 @@ const Setup = ({ isS3Configured }: SetupProps) => {
         </Card>
       )}
     </div>
-  );
-};
+  )
+}
 
-Setup.getLayout = Layout;
+Setup.getLayout = Layout
 
-export default Setup;
+export default Setup
 
 export async function getServerSideProps() {
   const {
@@ -66,14 +66,15 @@ export async function getServerSideProps() {
     AWS_ACCESSKEY_TOKEN,
     AWS_S3_BUCKET,
     AWS_S3_REGION,
-  } = process.env;
+  } = process.env
 
-  const isS3Configured =
-    Boolean(AWS_ACCESSKEY_ID && AWS_ACCESSKEY_TOKEN && AWS_S3_BUCKET && AWS_S3_REGION);
+  const isS3Configured = Boolean(
+    AWS_ACCESSKEY_ID && AWS_ACCESSKEY_TOKEN && AWS_S3_BUCKET && AWS_S3_REGION
+  )
 
   return {
     props: {
       isS3Configured,
     },
-  };
+  }
 }

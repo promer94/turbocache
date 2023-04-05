@@ -1,8 +1,12 @@
-import NextAuth, {  getServerSession, NextAuthOptions } from "next-auth";
-import GithubProvider from "next-auth/providers/github";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import prisma from './prisma';
-import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from 'next';
+import NextAuth, { getServerSession, NextAuthOptions } from 'next-auth'
+import GithubProvider from 'next-auth/providers/github'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import prisma from './prisma'
+import {
+  GetServerSidePropsContext,
+  NextApiRequest,
+  NextApiResponse,
+} from 'next'
 
 const option: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -13,19 +17,19 @@ const option: NextAuthOptions = {
     }),
   ],
   pages: {
-    newUser: "/api/onboarding",
+    newUser: '/api/onboarding',
   },
-  secret: process.env.NEXTAUTH_SECRET
-};
+  secret: process.env.NEXTAUTH_SECRET,
+}
 export const serverSession = (
   context:
     | GetServerSidePropsContext
     | {
-      req: NextApiRequest;
-      res: NextApiResponse;
-    }
+        req: NextApiRequest
+        res: NextApiResponse
+      }
 ) => {
-  return getServerSession(context.req, context.res, option);
+  return getServerSession(context.req, context.res, option)
 }
-const NextAuthHandler = NextAuth(option);
+const NextAuthHandler = NextAuth(option)
 export default NextAuthHandler

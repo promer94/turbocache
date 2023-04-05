@@ -3,11 +3,9 @@ import { Nav } from './Nav'
 
 export const Layout = (children: React.ReactNode) => {
   return (
-    <div className='flex flex-col min-h-full min-w-full'>
+    <div className="flex min-h-full min-w-full flex-col">
       <Nav></Nav>
-      <div className='flex flex-col mx-auto py-16'>
-        {children}
-      </div>
+      <div className="mx-auto flex flex-col py-16">{children}</div>
       <Footer></Footer>
     </div>
   )

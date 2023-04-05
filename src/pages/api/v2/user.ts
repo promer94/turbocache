@@ -1,11 +1,11 @@
-import { NextApiResponse } from "next";
-import { parseToken } from "../../../lib/parseToken";
-import prisma from "../../../lib/prisma";
-import { defaultApiHandler } from "../../../service/handler";
-import { LoggerRequest } from "../../../service/log";
+import { NextApiResponse } from 'next'
+import { parseToken } from '../../../lib/parseToken'
+import prisma from '../../../lib/prisma'
+import { defaultApiHandler } from '../../../service/handler'
+import { LoggerRequest } from '../../../service/log'
 
 const user = async (req: LoggerRequest, res: NextApiResponse) => {
-  const token = parseToken(req.headers.authorization);
+  const token = parseToken(req.headers.authorization)
   try {
     const info = await prisma.turboToken.findUnique({
       where: {
@@ -14,9 +14,9 @@ const user = async (req: LoggerRequest, res: NextApiResponse) => {
       include: {
         user: true,
       },
-    });
+    })
     if (!info) {
-      res.status(401).end("Unauthorized");
+      res.status(401).end('Unauthorized')
     } else {
       res.json({
         user: {
@@ -24,13 +24,13 @@ const user = async (req: LoggerRequest, res: NextApiResponse) => {
           name: info.user.name,
           email: info.user.email,
         },
-      });
+      })
     }
   } catch (e) {
-    req.logger.error({error: e}, 'User Middleware Error');
+    req.logger.error({ error: e }, 'User Middleware Error')
   }
-};
+}
 
-const handler = defaultApiHandler().get(user);
+const handler = defaultApiHandler().get(user)
 
-export default handler;
+export default handler

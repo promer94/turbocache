@@ -1,9 +1,9 @@
 export type Artifact = {
-  hash: string;
+  hash: string
   /**
    * Size in bytes
    */
-  size: number;
-  createdAt: string | null;
-  hitTimes: number;
-};
+  size: number
+  createdAt: string | null
+  hitTimes: number
+}

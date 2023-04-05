@@ -1,10 +1,16 @@
-import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
-import { CssBaseline } from '@geist-ui/core';
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+} from 'next/document'
+import { CssBaseline } from '@geist-ui/core'
 // @ts-ignore
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const initialProps = await Document.getInitialProps(ctx);
-    const styles = CssBaseline.flush();
+    const initialProps = await Document.getInitialProps(ctx)
+    const styles = CssBaseline.flush()
 
     return {
       ...initialProps,
@@ -14,7 +20,7 @@ class MyDocument extends Document {
           {styles}
         </>
       ),
-    };
+    }
   }
 
   render() {
@@ -26,8 +32,8 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    );
+    )
   }
 }
 
-export default MyDocument;
+export default MyDocument

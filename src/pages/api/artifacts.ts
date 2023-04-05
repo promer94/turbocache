@@ -1,9 +1,9 @@
-import { sessionMiddleWare, UserRequest } from "../../service/session";
-import { defaultApiHandler } from "../../service/handler";
-import { NextApiResponse } from "next";
-import { S3 } from "../../lib/s3/aws";
-import { Artifact } from "../../types";
-import prisma from "../../lib/prisma";
+import { sessionMiddleWare, UserRequest } from '../../service/session'
+import { defaultApiHandler } from '../../service/handler'
+import { NextApiResponse } from 'next'
+import { S3 } from '../../lib/s3/aws'
+import { Artifact } from '../../types'
+import prisma from '../../lib/prisma'
 
 const handler = defaultApiHandler()
   .use(sessionMiddleWare())
@@ -12,7 +12,7 @@ const handler = defaultApiHandler()
    * List artifacts (of a user's default team)
    */
   .get<UserRequest, NextApiResponse>(async (req, res) => {
-    const { id } = req.user;
+    const { id } = req.user
     const artifacts: Artifact[] =
       (await S3.list(id))
         // Order by last modified time desc
@@ -21,31 +21,31 @@ const handler = defaultApiHandler()
         )
         .map((_object) => {
           return {
-            hash: _object.Key!.replace(new RegExp("^" + id + "\\/"), ""),
+            hash: _object.Key!.replace(new RegExp('^' + id + '\\/'), ''),
             size: _object.Size!,
             createdAt: _object.LastModified?.toISOString() ?? null,
             hitTimes: 0,
-          };
-        }) ?? [];
+          }
+        }) ?? []
 
     const events = await prisma.eventItem.findMany({
       where: {
         hash: {
           in: artifacts.map((artifact) => artifact.hash),
         },
-        source: "REMOTE",
-        event: "HIT",
+        source: 'REMOTE',
+        event: 'HIT',
       },
-    });
+    })
 
     artifacts.forEach((artifact) => {
       artifact.hitTimes = events.filter(
         (event) => event.hash === artifact.hash
-      ).length;
-    });
+      ).length
+    })
     res.json({
       artifacts,
-    });
-  });
+    })
+  })
 
-export default handler;
+export default handler
