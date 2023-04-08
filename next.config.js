@@ -11,6 +11,9 @@ const nextConfig = {
   images: {
     domains: ["avatars.githubusercontent.com"],
   },
+  experimental: {
+    typedRoutes: true
+  },
   ...output
 };
 
