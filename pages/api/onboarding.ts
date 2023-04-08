@@ -7,24 +7,43 @@ import { findTeamsByUser } from '~/service/team'
 
 const onBorad = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getApiSession(req, res)
-  if(session) {
+  if (session) {
     const teams = await findTeamsByUser(req, res)
     if (is.emptyArray(teams)) {
-      const result = await prisma.team.create({
-        data: {
-          name: 'Personal',
+      const team = await prisma.team.create({
+        include: {
+          permissions: {
+            include: {
+              user: true
+            }
+          }
         },
+        data: {
+          name: 'Personal'
+        }
       })
       await prisma.permission.create({
+        include: {
+          user: true,
+          team: true
+        },
         data: {
-          teamId: result.id,
-          userId: session.user.id,
           role: 'ADMIN',
+          team: {
+            connect: {
+              id: team.id
+            }
+          },
+          user: {
+            connect: {
+              id: session.user.id
+            }
+          }
         }
       })
     }
   }
-  
+
 }
 
 const handler = defaultApiHandler()
