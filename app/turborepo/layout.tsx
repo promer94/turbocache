@@ -7,5 +7,5 @@ export default async function Layout({
   children: React.ReactNode
 }) {
   const session = await getSession()
-  return <AuthProvider session={session}>{children}</AuthProvider>
+  return <AuthProvider session={session as any}>{children}</AuthProvider>
 }

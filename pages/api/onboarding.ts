@@ -23,22 +23,10 @@ const onBorad = async (req: NextApiRequest, res: NextApiResponse) => {
         }
       })
       await prisma.permission.create({
-        include: {
-          user: true,
-          team: true
-        },
         data: {
           role: 'ADMIN',
-          team: {
-            connect: {
-              id: team.id
-            }
-          },
-          user: {
-            connect: {
-              id: session.user.id
-            }
-          }
+          userId: session.user.id,
+          teamId: team.id
         }
       })
     }
