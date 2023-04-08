@@ -12,7 +12,8 @@ const nextConfig = {
     domains: ["avatars.githubusercontent.com"],
   },
   experimental: {
-    typedRoutes: true
+    typedRoutes: true,
+    appDir: true
   },
   ...output
 };

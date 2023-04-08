@@ -1,8 +1,9 @@
 import { NextApiResponse } from 'next'
-import prisma from '~/src/lib/prisma'
-import { defaultApiHandler } from '~/src/service/handler'
-import { sessionMiddleWare, UserRequest } from '~/src/service/session'
+import prisma from '~/service/db/prisma'
+import { defaultApiHandler } from '~/service/handler'
+import { sessionMiddleWare, UserRequest } from '~/service/session'
 import is from '@sindresorhus/is'
+
 const onBorad = async ({ id, name }: { id: string; name?: string | null }) => {
   const team = await prisma.permission.findMany({
     where: {
