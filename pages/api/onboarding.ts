@@ -1,35 +1,35 @@
-import { NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '~/service/db/prisma'
 import { defaultApiHandler } from '~/service/handler'
-import { sessionMiddleWare, UserRequest } from '~/service/session'
 import is from '@sindresorhus/is'
+import { getApiSession } from '~/service/auth/next-auth'
+import { findTeamsByUser } from '~/service/team'
 
-const onBorad = async ({ id, name }: { id: string; name?: string | null }) => {
-  const team = await prisma.permission.findMany({
-    where: {
-      userId: id,
-    },
-  })
-  if (is.nonEmptyArray(team)) {
-    const result = await prisma.team.create({
-      data: {
-        name,
-      },
-    })
-    await prisma.permission.create({
-      data: {
-        teamId: result.id,
-        userId: id,
-        role: 'ADMIN',
-      }
-    })
+const onBorad = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await getApiSession(req, res)
+  if(session) {
+    const teams = await findTeamsByUser(req, res)
+    if (is.emptyArray(teams)) {
+      const result = await prisma.team.create({
+        data: {
+          name: 'Personal',
+        },
+      })
+      await prisma.permission.create({
+        data: {
+          teamId: result.id,
+          userId: session.user.id,
+          role: 'ADMIN',
+        }
+      })
+    }
   }
+  
 }
 
 const handler = defaultApiHandler()
-  .use(sessionMiddleWare())
-  .get<UserRequest, NextApiResponse>(async (req, res) => {
-    await onBorad({ id: req.user.id, name: `personal` })
+  .get(async (req, res) => {
+    await onBorad(req, res)
     res.redirect('/turborepo/onboarding')
   })
 

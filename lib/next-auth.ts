@@ -10,6 +10,9 @@ import {
 
 const option: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
+  session: {
+    strategy: 'jwt',
+  },
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID,
