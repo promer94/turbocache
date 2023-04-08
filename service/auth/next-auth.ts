@@ -73,16 +73,5 @@ export const getSession = async (
   return null
 }
 
-export const getApiSession = async (req: any, res: any) => {
-  const session = await getServerSession(req, res, option)
-  const result = SessionSchema.safeParse(session)
-  if (result.success) {
-    return result.data
-  } else {
-    console.log('result.error', result.error)
-  }
-  return null
-}
-
 const NextAuthHandler = NextAuth(option)
 export default NextAuthHandler

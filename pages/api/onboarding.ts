@@ -1,14 +1,15 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiResponse } from 'next'
 import prisma from '~/service/db/prisma'
 import { defaultApiHandler } from '~/service/handler'
 import is from '@sindresorhus/is'
-import { getApiSession } from '~/service/auth/next-auth'
+import { getSession } from '~/service/auth/next-auth'
 import { findTeamsByUser } from '~/service/team'
+import { LoggerRequest } from '~/service/log'
 
-const onBorad = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getApiSession(req, res)
+const onBorad = async (req: LoggerRequest, res: NextApiResponse) => {
+  const session = await getSession(req, res)
   if (session) {
-    const teams = await findTeamsByUser(req, res)
+    const teams = await findTeamsByUser(session.user.id)
     if (is.emptyArray(teams)) {
       const team = await prisma.team.create({
         include: {
@@ -22,7 +23,7 @@ const onBorad = async (req: NextApiRequest, res: NextApiResponse) => {
           name: 'Personal'
         }
       })
-      await prisma.permission.create({
+      const result = await prisma.permission.create({
         data: {
           role: 'ADMIN',
           userId: session.user.id,
@@ -30,8 +31,7 @@ const onBorad = async (req: NextApiRequest, res: NextApiResponse) => {
         }
       })
     }
-  }
-
+  } 
 }
 
 const handler = defaultApiHandler()
