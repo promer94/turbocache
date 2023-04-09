@@ -1,30 +1,31 @@
-import prisma from '~/service/db/prisma';
+import prisma from '~/service/db/prisma'
 import * as z from 'zod'
 
 const createValidator = z.object({
   name: z.string(),
-  slug: z.string().refine(v => !v.includes('/'), {
-    message: 'Slug cannot contain "/"'
+  slug: z.string().refine((v) => !v.includes('/'), {
+    message: 'Slug cannot contain "/"',
   }),
   userId: z.string(),
-  role: z.enum(['ADMIN', 'USER'])
+  role: z.enum(['ADMIN', 'USER']),
 })
 
 const queryValidator = z.object({
   userId: z.string(),
-  teamId: z.string()
+  teamId: z.string(),
 })
 
 const editValidator = z.object({
   name: z.optional(z.string()),
-  slug: z.optional(z.string().refine(v => !v.includes('/'), {
-    message: 'Slug cannot contain "/"'
-  })),
+  slug: z.optional(
+    z.string().refine((v) => !v.includes('/'), {
+      message: 'Slug cannot contain "/"',
+    })
+  ),
   storage: z.optional(z.any()),
   userId: z.string(),
-  teamId: z.string()
+  teamId: z.string(),
 })
-
 
 export const findTeamsByUser = (userId: string) => {
   const id = z.string().parse(userId)
@@ -32,11 +33,11 @@ export const findTeamsByUser = (userId: string) => {
     select: {
       team: true,
       role: true,
-      userId: true
+      userId: true,
     },
     where: {
-      userId: id
-    }
+      userId: id,
+    },
   })
 }
 
@@ -50,8 +51,8 @@ export const findTeamByUser = (params: {
       team: true,
     },
     where: {
-      ...result
-    }
+      ...result,
+    },
   })
 }
 
@@ -66,15 +67,15 @@ export const createTeam = async (params: {
     const team = await tx.team.create({
       data: {
         name,
-        slug
-      }
+        slug,
+      },
     })
     return tx.permission.create({
       data: {
         role,
         userId,
-        teamId: team.id
-      }
+        teamId: team.id,
+      },
     })
   })
 }
@@ -91,11 +92,11 @@ export const editTeam = async (params: {
       data: {
         name,
         slug,
-        storage
+        storage,
       },
       where: {
-        id: teamId
-      }
+        id: teamId,
+      },
     })
   })
 }

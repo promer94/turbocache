@@ -1,12 +1,10 @@
-import prisma from '~/service/db/prisma';
+import prisma from '~/service/db/prisma'
 
+const findAuthUser = async (userId: string) =>
+  prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  })
 
-const findAuthUser = async (userId: string) => prisma.user.findUnique({
-  where: {
-    id: userId,
-  },
-})
-
-export {
-  findAuthUser,
-}
+export { findAuthUser }

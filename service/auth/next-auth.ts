@@ -21,7 +21,7 @@ export const SessionSchema = z.object({
     email: z.string(),
     image: z.string(),
   }),
-  expires: z.optional(z.string())
+  expires: z.optional(z.string()),
 })
 
 const option = {
@@ -52,17 +52,16 @@ const option = {
         session.user.id = token.userId
       }
       return session as TurboSession
-    }
-  }
+    },
+  },
 } satisfies NextAuthOptions
-
-
-
 
 export const getSession = async (
   ...args: [] | [NextApiRequest, NextApiResponse]
 ) => {
-  const params: [NextApiRequest, NextApiResponse, typeof option] | [typeof option] = is.nonEmptyArray(args) ? [...args, option] : [option]
+  const params:
+    | [NextApiRequest, NextApiResponse, typeof option]
+    | [typeof option] = is.nonEmptyArray(args) ? [...args, option] : [option]
   const session = await getServerSession(...params)
   const result = SessionSchema.parse(session)
   return result

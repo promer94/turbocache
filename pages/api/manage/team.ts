@@ -3,7 +3,6 @@ import is from '@sindresorhus/is'
 import { getSession } from '~/service/auth/next-auth'
 import { findTeamsByUser, createTeam } from '~/service/team'
 
-
 const handler = defaultApiHandler()
   .get(async (req, res) => {
     const session = await getSession(req, res)
@@ -11,10 +10,10 @@ const handler = defaultApiHandler()
       const teams = await findTeamsByUser(session.user.id)
       if (is.nonEmptyArray(teams)) {
         return res.status(200).json({
-          teams: teams.map(v => ({
+          teams: teams.map((v) => ({
             role: v.role,
-            ...v.team
-          }))
+            ...v.team,
+          })),
         })
       }
     }

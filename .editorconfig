@@ -1,3 +1,5 @@
+[*]
+max_line_length = 80
 [*.{ts,tsx,js,jsx}]
 indent_size = 2
 indent_style = space

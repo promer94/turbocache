@@ -3,7 +3,8 @@ import { PrismaClient } from '@prisma/client'
 // @ts-ignore
 const prisma =
   // @ts-ignore
-  global.prisma || new PrismaClient({
+  global.prisma ||
+  new PrismaClient({
     log: ['error'],
   })
 // @ts-ignore
