@@ -1,10 +1,17 @@
-import { cn } from '~/lib/utils'
+import { DashBoardContainer } from '~/components/DashboardContainer'
+import { getSession } from '~/service/auth/next-auth'
 
-const DashboardPage = () => {
+const DashboardPage = async () => {
+  const session = await getSession()
   return (
-    <section className={cn('container px-10 py-5')}>
-      <h1 className="text-2xl font-semibold">Dashboard</h1>
-    </section>
+    <DashBoardContainer
+      pageTitle={
+        <div className="space-y-4">
+          <div className="text-2xl font-semibold">Dashboard</div>
+          <p className="text-gray-500">Welcome, {session.user.name}</p>
+        </div>
+      }
+    ></DashBoardContainer>
   )
 }
 

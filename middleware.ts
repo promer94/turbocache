@@ -8,4 +8,4 @@ export default withAuth(
   }
 )
 
-export const config = { matcher: ['/turborepo/:path*'] }
+export const config = { matcher: ['/dashboard/:path*'] }

@@ -7,7 +7,7 @@ import { cn } from '~/lib/utils'
 const linkClassName = `
   flex items-center 
   px-4 py-2 
-  text-sm font-semibold text-black-300
+  text-sm font-semibold text-black-100
   hover:bg-slate-200 hover:text-black-500
   rounded-md
   space-x-2
@@ -20,7 +20,7 @@ export const DashboardNav = () => {
       <Link
         href="/dashboard/teams"
         className={cn(linkClassName, {
-          'bg-slate-200 text-black-500': segment === 'teams',
+          'text-black-500 bg-slate-200': segment === 'teams',
         })}
       >
         <UsersIcon className={iconSize}></UsersIcon>
@@ -29,7 +29,7 @@ export const DashboardNav = () => {
       <Link
         href="/dashboard/settings"
         className={cn(linkClassName, {
-          'bg-slate-200 text-black-500': segment === 'settings',
+          'text-black-500 bg-slate-200': segment === 'settings',
         })}
       >
         <Settings className={iconSize}></Settings>
