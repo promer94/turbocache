@@ -64,13 +64,8 @@ export const getSession = async (
 ) => {
   const params: [NextApiRequest, NextApiResponse, typeof option] | [typeof option] = is.nonEmptyArray(args) ? [...args, option] : [option]
   const session = await getServerSession(...params)
-  const result = SessionSchema.safeParse(session)
-  if (result.success) {
-    return result.data
-  } else {
-    console.log('result.error', result.error)
-  }
-  return null
+  const result = SessionSchema.parse(session)
+  return result
 }
 
 const NextAuthHandler = NextAuth(option)
