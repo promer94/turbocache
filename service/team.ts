@@ -27,8 +27,11 @@ const editValidator = z.object({
   teamId: z.string(),
 })
 
-export const findTeamsByUser = (userId: string) => {
-  const id = z.string().parse(userId)
+export const findTeamsByUser = (query: {userId: string, slug?: string}) => {
+  const { userId, slug } = z.object({
+    userId: z.string(),
+    slug: z.optional(z.string()),
+  }).parse(query)
   return prisma.permission.findMany({
     select: {
       team: true,
@@ -36,7 +39,10 @@ export const findTeamsByUser = (userId: string) => {
       userId: true,
     },
     where: {
-      userId: id,
+      userId,
+      team: {
+        slug
+      }
     },
   })
 }
