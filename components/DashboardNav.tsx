@@ -1,14 +1,14 @@
 'use client'
 import { useSelectedLayoutSegment } from 'next/navigation'
-import { Settings, UsersIcon } from 'lucide-react'
+import { Settings, BriefcaseIcon } from 'lucide-react'
 import Link from 'next/link'
 import { cn } from '~/lib/utils'
 
 const linkClassName = `
   flex items-center 
   px-4 py-2 
-  text-sm font-semibold text-black-100
-  hover:bg-slate-200 hover:text-black-500
+  text-sm font-semibold
+  hover:bg-green-400 hover:text-white
   rounded-md
   space-x-2
 `
@@ -20,16 +20,16 @@ export const DashboardNav = () => {
       <Link
         href="/dashboard/projects"
         className={cn(linkClassName, {
-          'text-black-500 bg-slate-200': segment === 'projects',
+          'text-gray-50 bg-green-400': segment === 'projects',
         })}
       >
-        <UsersIcon className={iconSize}></UsersIcon>
+        <BriefcaseIcon className={iconSize}></BriefcaseIcon>
         <div>Projects</div>
       </Link>
       <Link
         href="/dashboard/settings"
         className={cn(linkClassName, {
-          'text-black-500 bg-slate-200': segment === 'settings',
+          'text-gray-50 bg-green-400': segment === 'settings',
         })}
       >
         <Settings className={iconSize}></Settings>

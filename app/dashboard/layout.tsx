@@ -3,7 +3,6 @@ import { cn } from '~/lib/utils'
 import { getSession } from '~/service/auth/next-auth'
 import { SearchIcon } from 'lucide-react'
 import { DashboardNav } from '~/components/DashboardNav'
-import { DashBoardContainer } from '~/components/DashboardContainer'
 
 export default async function DashboardLayout({
   children,
@@ -13,7 +12,7 @@ export default async function DashboardLayout({
   const session = await getSession()
   return (
     <main className={cn('flex min-h-screen')}>
-      <section className={cn('flex w-[260px] flex-col bg-slate-50 px-4')}>
+      <section className={cn('flex w-[260px] flex-col px-4')}>
         <header className={cn('flex items-center justify-between px-2 py-4')}>
           <Link href="/dashboard" className={cn('text-lg font-semibold')}>
             Turbocache
@@ -24,9 +23,9 @@ export default async function DashboardLayout({
           <DashboardNav></DashboardNav>
         </div>
       </section>
-      <DashBoardContainer session={session}>
+      <section className={'container flex flex-col gap-12 p-16'}>
         {children}
-      </DashBoardContainer>
+      </section>
     </main>
   )
 }

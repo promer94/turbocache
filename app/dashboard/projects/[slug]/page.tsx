@@ -1,7 +1,7 @@
-import { cn } from '~/lib/utils'
 import { getSession } from '~/service/auth/next-auth'
 import { findProjectBySlugOrId } from '~/service/project'
 import { notFound } from 'next/navigation'
+import { DashboardPageHeader } from '~/components/DashboardPageHeader'
 interface Params {
   params: {
     slug: string
@@ -17,7 +17,15 @@ const ProjectSlugPage = async ({ params }: Params) => {
   if (!result) {
     notFound()
   }
-  return <h2 className="text-2xl font-semibold">{result.project.slug} {result.project.name}</h2>
+  return (
+    <>
+      <DashboardPageHeader title={result.project.name ?? 'Awesome Project'} description={result.project.description ?? session.user.email} >
+      </DashboardPageHeader>
+      <div>token</div>
+      <div>member</div>
+      <div>storage</div>
+    </>
+  )
 }
 
 export default ProjectSlugPage
