@@ -36,7 +36,7 @@ const option = {
     }),
   ],
   pages: {
-    newUser: '/api/onboarding',
+    newUser: '/api/v1/onboarding',
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {

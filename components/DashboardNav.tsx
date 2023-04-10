@@ -18,13 +18,13 @@ export const DashboardNav = () => {
   return (
     <nav className={cn('flex flex-col gap-2')}>
       <Link
-        href="/dashboard/teams"
+        href="/dashboard/projects"
         className={cn(linkClassName, {
-          'text-black-500 bg-slate-200': segment === 'teams',
+          'text-black-500 bg-slate-200': segment === 'projects',
         })}
       >
         <UsersIcon className={iconSize}></UsersIcon>
-        <div>Teams</div>
+        <div>Projects</div>
       </Link>
       <Link
         href="/dashboard/settings"

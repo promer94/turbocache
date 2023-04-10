@@ -9,14 +9,12 @@ interface Props {
   className?: string
   iconClass?: string
   inputClass?: string
-  id: string
   isLoading?: boolean
 }
 export const Search = React.forwardRef<HTMLInputElement, Props>(({
   className,
   iconClass,
   inputClass,
-  id,
   isLoading
 }: Props, ref) => {
   return (
@@ -38,7 +36,6 @@ export const Search = React.forwardRef<HTMLInputElement, Props>(({
       <SearchIcon className={cn('h-5 w-5', iconClass)} />
       <input
         ref={ref}
-        id={id}
         name='slug'
         className={cn('flex-1 focus-visible:outline-none', inputClass)}
         type="text"
@@ -52,7 +49,7 @@ export const Search = React.forwardRef<HTMLInputElement, Props>(({
 })
 
 
-export const SearchTeam = () => {
+export const SearchProject = () => {
   const searchRef = React.useRef<HTMLInputElement>(null)
   const router = useRouter()
   const searchParams = useSearchParams();
@@ -71,11 +68,11 @@ export const SearchTeam = () => {
       search.set('slug', searchRef.current?.value)
       search.delete('page')
       start(() => {
-        router.replace(`/dashboard/teams?${search.toString()}`)
+        router.replace(`/dashboard/projects?${search.toString()}`)
       })
     } else {
       start(() => {
-        router.replace(`/dashboard/teams`)
+        router.replace(`/dashboard/projects`)
       })
     }
   }
@@ -84,7 +81,7 @@ export const SearchTeam = () => {
       className="flex space-x-2"
       onSubmit={handleSubmit}
     >
-      <Search isLoading={isPending} className='w-[420px]' ref={searchRef} id="teams"></Search>
+      <Search isLoading={isPending} className='w-[420px]' ref={searchRef}></Search>
       <button className='hidden' type="submit">search</button>
     </form>
   )

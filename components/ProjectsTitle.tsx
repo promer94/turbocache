@@ -2,7 +2,7 @@
 
 import { useSelectedLayoutSegment } from 'next/navigation'
 
-export const TeamTitle = ({ slug }: { slug?: string }) => {
+export const ProjectTitle = ({ slug }: { slug?: string }) => {
   const segment = useSelectedLayoutSegment()
   if (segment) {
     return (
@@ -14,8 +14,8 @@ export const TeamTitle = ({ slug }: { slug?: string }) => {
   }
   return (
     <div className="space-y-4">
-      <h1 className="text-3xl font-semibold">Teams</h1>
-      <p className="text-gray-500">Create and search your teams</p>
+      <h1 className="text-3xl font-semibold">Projects</h1>
+      <p className="text-gray-500">Create and search your projects</p>
     </div>
   )
 }

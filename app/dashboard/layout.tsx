@@ -3,6 +3,7 @@ import { cn } from '~/lib/utils'
 import { getSession } from '~/service/auth/next-auth'
 import { SearchIcon } from 'lucide-react'
 import { DashboardNav } from '~/components/DashboardNav'
+import { DashBoardContainer } from '~/components/DashboardContainer'
 
 export default async function DashboardLayout({
   children,
@@ -23,7 +24,9 @@ export default async function DashboardLayout({
           <DashboardNav></DashboardNav>
         </div>
       </section>
-      {children}
+      <DashBoardContainer session={session}>
+        {children}
+      </DashBoardContainer>
     </main>
   )
 }
