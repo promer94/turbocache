@@ -1,5 +1,5 @@
 'use client'
-import { SearchIcon } from 'lucide-react'
+import { SearchIcon, CornerDownLeftIcon, Loader2 } from 'lucide-react'
 import { cn } from '~/lib/utils'
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
@@ -10,17 +10,19 @@ interface Props {
   iconClass?: string
   inputClass?: string
   id: string
+  isLoading?: boolean
 }
 export const Search = React.forwardRef<HTMLInputElement, Props>(({
   className,
   iconClass,
   inputClass,
-  id
+  id,
+  isLoading
 }: Props, ref) => {
   return (
     <div
       className={cn(
-        'flex h-10 w-full space-x-2',
+        'flex h-10 w-full items-center gap-2',
         'rounded-md border border-sky-100',
         'bg-transparent',
         'px-3 py-2',
@@ -33,9 +35,7 @@ export const Search = React.forwardRef<HTMLInputElement, Props>(({
         className
       )}
     >
-      <SearchIcon className={
-        cn('y-5 w-5', iconClass)
-      }></SearchIcon>
+      <SearchIcon className={cn('h-5 w-5', iconClass)} />
       <input
         ref={ref}
         id={id}
@@ -44,7 +44,9 @@ export const Search = React.forwardRef<HTMLInputElement, Props>(({
         type="text"
         placeholder="Search..."
       />
-      <kbd>⏎ </kbd>
+      {isLoading ? <Loader2 className={cn('h-3 w-3 animate-spin', iconClass)}></Loader2>
+        : <CornerDownLeftIcon className={cn('h-3 w-3', iconClass)}></CornerDownLeftIcon>}
+
     </div>
   )
 })
@@ -71,6 +73,10 @@ export const SearchTeam = () => {
       start(() => {
         router.replace(`/dashboard/teams?${search.toString()}`)
       })
+    } else {
+      start(() => {
+        router.replace(`/dashboard/teams`)
+      })
     }
   }
   return (
@@ -78,7 +84,7 @@ export const SearchTeam = () => {
       className="flex space-x-2"
       onSubmit={handleSubmit}
     >
-      <Search className='w-64' ref={searchRef} id="teams"></Search>
+      <Search isLoading={isPending} className='w-[420px]' ref={searchRef} id="teams"></Search>
       <button className='hidden' type="submit">search</button>
     </form>
   )

@@ -145,5 +145,3 @@ model Storage {
 
   @@map("storages")
 }
-
-

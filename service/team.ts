@@ -12,7 +12,8 @@ const createValidator = z.object({
 
 const queryValidator = z.object({
   userId: z.string(),
-  teamId: z.string(),
+  teamId: z.string().optional(),
+  slug: z.string().optional(),
 })
 
 const editValidator = z.object({
@@ -27,37 +28,76 @@ const editValidator = z.object({
   teamId: z.string(),
 })
 
-export const findTeamsByUser = (query: {userId: string, slug?: string}) => {
-  const { userId, slug } = z.object({
+export const findTeamsByUser = (query: { userId: string, slug?: string, page?: string, size?: string }) => {
+  const { userId, page, size, slug } = z.object({
     userId: z.string(),
     slug: z.optional(z.string()),
+    page: z.optional(z.string()).transform((v) => parseInt(v ? v : '1', 10)),
+    size: z.optional(z.string()).transform((v) => parseInt(v ? v : '2', 10)),
   }).parse(query)
-  return prisma.permission.findMany({
-    select: {
-      team: true,
-      role: true,
-      userId: true,
-    },
-    where: {
-      userId,
-      team: {
-        slug
+  return prisma.$transaction(async (tx) => {
+    const userTeams = await tx.permission.findMany({
+      select: {
+        teamId: true,
+        role: true,
+      },
+      where: {
+        userId,
       }
-    },
+    })
+    const validId = userTeams.map((v) => v.teamId)
+    const permissionMap = new Map<string, 'ADMIN' | 'USER'>(userTeams.map((v) => [v.teamId, v.role]))
+    const total = await tx.team.count({
+      where: {
+        id: {
+          in: validId,
+        },
+        slug: {
+          contains: slug,
+        }
+      }
+    })
+    const teams = await tx.team.findMany({
+      skip: (page - 1) * size,
+      take: size,
+      where: {
+        id: {
+          in: validId,
+        },
+        slug: {
+          contains: slug,
+        }
+      }
+    })
+    return {
+      total,
+      teams: teams.map((v) => ({
+        team: v,
+        role: permissionMap.get(v.id),
+      }))
+    }
   })
 }
 
-export const findTeamByUser = (params: {
+export const findTeamBySlugOrId = (params: {
   userId?: string
   teamId?: string
+  slug?: string
 }) => {
   const result = queryValidator.parse(params)
-  return prisma.permission.findFirstOrThrow({
+  return prisma.permission.findFirst({
     include: {
       team: true,
     },
     where: {
-      ...result,
+      userId: result.userId,
+      OR: [{
+        teamId: result.teamId,
+      }, {
+        team: {
+          slug: result.slug,
+        }
+      }]
     },
   })
 }

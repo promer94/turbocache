@@ -5,7 +5,7 @@ const prisma =
   // @ts-ignore
   global.prisma ||
   new PrismaClient({
-    log: ['error'],
+    log: ['query'],
   })
 // @ts-ignore
 if (process.env.NODE_ENV === 'development') global.prisma = prisma

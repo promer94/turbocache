@@ -127,3 +127,4 @@ CREATE TABLE `storages` (
     UNIQUE INDEX `storages_team_id_key`(`team_id`),
     PRIMARY KEY (`storage_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
