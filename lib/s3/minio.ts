@@ -6,7 +6,6 @@ import {
 } from '@aws-sdk/client-s3'
 import { Upload } from '@aws-sdk/lib-storage'
 import { Readable } from 'stream'
-import { TurboObjectStorage } from '../storage'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { defaultS3Config, S3StorageOptions } from './config'
 
@@ -29,7 +28,7 @@ const minioSignConfig = {
   forcePathStyle: true,
 }
 
-export class MinioStorage implements TurboObjectStorage {
+export class MinioStorage {
   public client: S3Client
   public signClient: S3Client
   public options: S3StorageOptions

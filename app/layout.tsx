@@ -1,6 +1,7 @@
 import '~/styles/tailwind.css'
 import localFont from 'next/font/local'
 import { cn } from '~/lib/utils'
+import { Providers } from './providers'
 
 const fontSans = localFont({
   src: '../styles/Inter-VariableFont_slnt,wght.ttf',
@@ -18,8 +19,10 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html>
-      <body className={cn(fontSans.variable, 'font-sans')}>{children}</body>
+    <html suppressHydrationWarning>
+      <body className={cn(fontSans.variable, 'font-sans')}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }

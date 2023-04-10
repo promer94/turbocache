@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { cn } from '~/lib/utils'
 import { getSession } from '~/service/auth/next-auth'
-import { SearchIcon } from 'lucide-react'
 import { DashboardNav } from '~/components/DashboardNav'
 
 export default async function DashboardLayout({
@@ -11,19 +10,18 @@ export default async function DashboardLayout({
 }) {
   const session = await getSession()
   return (
-    <main className={cn('flex min-h-screen')}>
-      <section className={cn('flex w-[260px] flex-col px-4')}>
+    <main className={'px-6 py-2'}>
+      <section className={cn('sticky top-0 h-0 w-[240px] flex-col')}>
         <header className={cn('flex items-center justify-between px-2 py-4')}>
           <Link href="/dashboard" className={cn('text-lg font-semibold')}>
             Turbocache
           </Link>
-          <SearchIcon className={cn('h-4 w-4')}></SearchIcon>
         </header>
         <div>
           <DashboardNav></DashboardNav>
         </div>
       </section>
-      <section className={'container flex flex-col gap-12 p-16'}>
+      <section className={'ml-[240px] flex flex-col gap-12 px-12 py-10'}>
         {children}
       </section>
     </main>

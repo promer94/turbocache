@@ -6,6 +6,7 @@ import { getSession } from '~/service/auth/next-auth'
 import { findProjectsByUser } from '~/service/project'
 import { View, UserCogIcon } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/Avatar"
+import Balancer from 'react-wrap-balancer'
 interface Props {
   searchParams: {
     slug?: string
@@ -25,10 +26,10 @@ const ProjectsPage = async ({
   })
   return (
     <>
-      <div className="flex max-w-[768px] items-center justify-between">
-        <div className="flex flex-col gap-4">
+      <div className="flex justify-between">
+        <div className="flex flex-1 flex-col gap-4">
           <div className="text-2xl font-semibold">Dashboard</div>
-          <p className="line-clamp-1 text-gray-500">Create and search your awesome projects here</p>
+          <Balancer className=" text-gray-500">Create and search your awesome projects here</Balancer>
         </div>
         <div className='flex flex-col items-end gap-4'>
           <Avatar>
@@ -40,9 +41,9 @@ const ProjectsPage = async ({
           </div>
         </div>
       </div>
-      <section className="round-md flex max-w-[768px] flex-col gap-8">
+      <section className="round-md flex flex-col gap-8">
         <SearchProject></SearchProject>
-        <div className='grid grid-cols-2 gap-4'>
+        <div className='grid gap-4 md:grid-cols-2 xl:grid-cols-3'>
           {result.projects.map((item) => (
             <Link
               key={item.project.id}
@@ -55,13 +56,13 @@ const ProjectsPage = async ({
               )
               }
             >
-              <div className='flex flex-col gap-2'>
-                <div
-                  className='line-clamp-1 text-lg font-bold text-green-400'
+              <div className='flex flex-1 flex-col gap-2'>
+                <Balancer
+                  className='text-lg font-bold text-green-400'
                 >
                   {item.project.name}
-                </div>
-                <div className='line-clamp-2 text-gray-600' >{item.project.description ?? 'Your awesome Project'}</div>
+                </Balancer>
+                <Balancer className='text-gray-600'>{item.project.description ?? 'Your awesome Project'}</Balancer>
               </div>
               <div className='flex flex-col gap-2'>
                 {item.role === 'ADMIN' ? <UserCogIcon className='h-7 w-5'></UserCogIcon> : <View className='h-7 w-5'></View>}

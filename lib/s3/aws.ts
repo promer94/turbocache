@@ -6,11 +6,10 @@ import {
 } from '@aws-sdk/client-s3'
 import { Upload } from '@aws-sdk/lib-storage'
 import { Readable } from 'stream'
-import { TurboObjectStorage } from '../storage'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { defaultS3Config, S3StorageOptions } from './config'
 
-export class S3Storage implements TurboObjectStorage {
+export class S3Storage {
   public client: S3Client
   public options: S3StorageOptions
   constructor(options?: S3StorageOptions) {
