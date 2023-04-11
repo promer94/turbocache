@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { cn } from '~/lib/utils'
+import { DashboardNav } from '~/app/dashboard/DashboardNav'
+import { AuthProvider } from '~/components/AuthProvider'
 import { getSession } from '~/service/auth/next-auth'
-import { DashboardNav } from '~/components/DashboardNav'
 
 export default async function DashboardLayout({
   children,
@@ -22,7 +23,7 @@ export default async function DashboardLayout({
         </div>
       </section>
       <section className={'ml-[240px] flex flex-col gap-12 px-12 py-10'}>
-        {children}
+        <AuthProvider session={session as any}>{children}</AuthProvider>
       </section>
     </main>
   )

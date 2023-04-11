@@ -19,7 +19,7 @@ const ProjectLayout = async ({
         <div className='flex flex-col items-end gap-4'>
           <Avatar>
             <AvatarImage className='h-8 w-8' src={session.user.image} alt={session.user.email} />
-            <AvatarFallback className='h-8 w-8'>{session.user.name}</AvatarFallback>
+            <AvatarFallback className='h-8 w-8'>{session.user.name.slice(0, 2)}</AvatarFallback>
           </Avatar>
           <div className='text-gray-600'>
             {session.user.email}

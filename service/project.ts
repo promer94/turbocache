@@ -103,6 +103,14 @@ export const findProjectBySlugOrId = (params: {
   })
 }
 
+export const verifySlug = (slug: string) => {
+  return prisma.project.findUnique({
+    where: {
+      slug,
+    },
+  })
+}
+
 export const createProject = async (params: {
   name?: string
   slug?: string
