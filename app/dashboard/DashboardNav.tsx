@@ -20,7 +20,7 @@ export const DashboardNav = () => {
       <Link
         href="/dashboard/projects"
         className={cn(linkClassName, {
-          'text-gray-50 bg-green-400': segment === 'projects',
+          'bg-green-400 text-gray-50': segment === 'projects',
         })}
       >
         <BriefcaseIcon className={iconSize}></BriefcaseIcon>
@@ -29,7 +29,7 @@ export const DashboardNav = () => {
       <Link
         href="/dashboard/settings"
         className={cn(linkClassName, {
-          'text-gray-50 bg-green-400': segment === 'settings',
+          'bg-green-400 text-gray-50': segment === 'settings',
         })}
       >
         <Settings className={iconSize}></Settings>

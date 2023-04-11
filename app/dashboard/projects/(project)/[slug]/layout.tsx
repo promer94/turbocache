@@ -20,8 +20,10 @@ const ProjectSlugLayout = async ({ params, children }: Props) => {
   }
   return (
     <>
-      <DashboardPageHeader title={result.project.name ?? 'Awesome Project'} description={result.project.description ?? session.user.email} >
-      </DashboardPageHeader>
+      <DashboardPageHeader
+        title={result.project.name ?? 'Awesome Project'}
+        description={result.project.description ?? session.user.email}
+      ></DashboardPageHeader>
       {children}
     </>
   )

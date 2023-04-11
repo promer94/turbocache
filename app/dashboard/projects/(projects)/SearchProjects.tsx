@@ -10,7 +10,7 @@ import { NewProjectDialog } from './NewProjectDialog'
 export const SearchProjects = () => {
   const searchRef = React.useRef<HTMLInputElement>(null)
   const router = useRouter()
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams()
   const slug = searchParams?.get('slug')
   const [isPending, start] = React.useTransition()
   React.useLayoutEffect(() => {
@@ -35,17 +35,22 @@ export const SearchProjects = () => {
     }
   }
   return (
-    <form
-      className="flex gap-8"
-      onSubmit={handleSubmit}
-    >
+    <form className="flex gap-8" onSubmit={handleSubmit}>
       <Input
         prefixItem={<SearchIcon className={cn('h-5 w-5')} />}
-        suffixItem={isPending ? <Loader2 className={cn('h-3 w-3 animate-spin')} /> : <CornerDownLeftIcon className={cn('h-3 w-3')} />}
+        suffixItem={
+          isPending ? (
+            <Loader2 className={cn('h-3 w-3 animate-spin')} />
+          ) : (
+            <CornerDownLeftIcon className={cn('h-3 w-3')} />
+          )
+        }
         ref={searchRef}
         placeholder="Search..."
       />
-      <button className='hidden' type="submit">search</button>
+      <button className="hidden" type="submit">
+        search
+      </button>
       <NewProjectDialog></NewProjectDialog>
     </form>
   )

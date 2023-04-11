@@ -19,7 +19,11 @@ const handler = defaultApiHandler()
   .post(async (req, res) => {
     const session = await getSession(req, res)
     if (session) {
-      await createProject({ ...req.body, userId: session.user.id, role: 'ADMIN' })
+      await createProject({
+        ...req.body,
+        userId: session.user.id,
+        role: 'ADMIN',
+      })
     }
     res.status(200).json({ success: true })
   })

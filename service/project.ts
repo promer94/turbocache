@@ -3,9 +3,11 @@ import * as z from 'zod'
 
 const createValidator = z.object({
   name: z.string(),
-  slug: z.optional(z.string().refine((v) => !v.includes('/'), {
-    message: 'Slug cannot contain "/"',
-  })),
+  slug: z.optional(
+    z.string().refine((v) => !v.includes('/'), {
+      message: 'Slug cannot contain "/"',
+    })
+  ),
   userId: z.string(),
   role: z.enum(['ADMIN', 'USER']),
   description: z.optional(z.string()),
@@ -29,13 +31,20 @@ const editValidator = z.object({
   projectId: z.string(),
 })
 
-export const findProjectsByUser = (query: { userId: string, slug?: string, page?: string, size?: string }) => {
-  const { userId, page, size, slug } = z.object({
-    userId: z.string(),
-    slug: z.optional(z.string()),
-    page: z.optional(z.string()).transform((v) => parseInt(v ? v : '1', 10)),
-    size: z.optional(z.string()).transform((v) => parseInt(v ? v : '10', 10)),
-  }).parse(query)
+export const findProjectsByUser = (query: {
+  userId: string
+  slug?: string
+  page?: string
+  size?: string
+}) => {
+  const { userId, page, size, slug } = z
+    .object({
+      userId: z.string(),
+      slug: z.optional(z.string()),
+      page: z.optional(z.string()).transform((v) => parseInt(v ? v : '1', 10)),
+      size: z.optional(z.string()).transform((v) => parseInt(v ? v : '10', 10)),
+    })
+    .parse(query)
   return prisma.$transaction(async (tx) => {
     const userProjects = await tx.permission.findMany({
       select: {
@@ -44,10 +53,12 @@ export const findProjectsByUser = (query: { userId: string, slug?: string, page?
       },
       where: {
         userId,
-      }
+      },
     })
     const validId = userProjects.map((v) => v.projectId)
-    const permissionMap = new Map<string, 'ADMIN' | 'USER'>(userProjects.map((v) => [v.projectId, v.role]))
+    const permissionMap = new Map<string, 'ADMIN' | 'USER'>(
+      userProjects.map((v) => [v.projectId, v.role])
+    )
     const total = await tx.project.count({
       where: {
         id: {
@@ -55,8 +66,8 @@ export const findProjectsByUser = (query: { userId: string, slug?: string, page?
         },
         slug: {
           contains: slug,
-        }
-      }
+        },
+      },
     })
     const projects = await tx.project.findMany({
       skip: (page - 1) * size,
@@ -67,15 +78,15 @@ export const findProjectsByUser = (query: { userId: string, slug?: string, page?
         },
         slug: {
           contains: slug,
-        }
-      }
+        },
+      },
     })
     return {
       total,
       projects: projects.map((v) => ({
         project: v,
         role: permissionMap.get(v.id),
-      }))
+      })),
     }
   })
 }
@@ -92,13 +103,16 @@ export const findProjectBySlugOrId = (params: {
     },
     where: {
       userId: result.userId,
-      OR: [{
-        projectId: result.projectId,
-      }, {
-        project: {
-          slug: result.slug,
-        }
-      }]
+      OR: [
+        {
+          projectId: result.projectId,
+        },
+        {
+          project: {
+            slug: result.slug,
+          },
+        },
+      ],
     },
   })
 }
@@ -118,13 +132,14 @@ export const createProject = async (params: {
   role?: 'ADMIN' | 'USER'
   description?: string
 }) => {
-  const { name, slug, userId, role, description } = createValidator.parse(params)
+  const { name, slug, userId, role, description } =
+    createValidator.parse(params)
   return prisma.$transaction(async (tx) => {
     const project = await tx.project.create({
       data: {
         name,
         slug,
-        description
+        description,
       },
     })
     return tx.permission.create({

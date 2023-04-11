@@ -10,9 +10,8 @@ const handler = defaultApiHandler()
     const data = await findProjectBySlugOrId({
       userId: session.user.id,
       projectId,
-
     })
-    if(!data) {
+    if (!data) {
       res.status(404).end('Not Found')
       return
     }

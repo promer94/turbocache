@@ -1,10 +1,9 @@
 import Balancer from 'react-wrap-balancer'
 interface Props {
   children?: React.ReactNode
-  title: string,
+  title: string
   description: string
 }
-
 
 export const DashboardPageHeader = ({ title, description }: Props) => {
   return (

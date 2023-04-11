@@ -1,4 +1,8 @@
-export const DashboardLoading = ({ children }: { children: React.ReactNode }) => {
+export const DashboardLoading = ({
+  children,
+}: {
+  children: React.ReactNode
+}) => {
   return (
     <section className={'flex flex-col gap-12 px-12 py-10'}>
       <div className="space-y-4">
