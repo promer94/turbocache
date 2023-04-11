@@ -58,27 +58,33 @@ export const findProjectsByUser = (query: {
     const permissionMap = new Map<string, 'ADMIN' | 'USER'>(
       userProjects.map((v) => [v.projectId, v.role])
     )
-    const OR = slug ? [{
-      slug: {
-        contains: slug,
-      }
-    }, {
-      name: {
-        contains: slug,
-      }
-    }, {
-      description: {
-        contains: slug,
-      }
-    }] : null
+    const OR = slug
+      ? [
+          {
+            slug: {
+              contains: slug,
+            },
+          },
+          {
+            name: {
+              contains: slug,
+            },
+          },
+          {
+            description: {
+              contains: slug,
+            },
+          },
+        ]
+      : null
     const total = await tx.project.count({
       where: {
         id: {
           in: validId,
         },
-        ...OR && {
-          OR
-        }
+        ...(OR && {
+          OR,
+        }),
       },
     })
     const projects = await tx.project.findMany({
@@ -88,9 +94,9 @@ export const findProjectsByUser = (query: {
         id: {
           in: validId,
         },
-        ...OR && {
-          OR
-        }
+        ...(OR && {
+          OR,
+        }),
       },
     })
     return {

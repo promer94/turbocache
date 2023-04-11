@@ -30,12 +30,15 @@ interface FormState {
   description?: string
 }
 
-
 const Form = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
   const router = useRouter()
   const [isPending, start] = useTransition()
-  const { register, handleSubmit, formState: { errors, isValidating } } = useForm<FormState>({
-    mode: 'onBlur'
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValidating },
+  } = useForm<FormState>({
+    mode: 'onBlur',
   })
   const { trigger, isMutating } = useSWRMutation(
     '/api/v1/admin/project',
@@ -60,17 +63,14 @@ const Form = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
       </DialogHeader>
       <form
         onSubmit={handleSubmit((data) =>
-          trigger(
-            data,
-            {
-              onSuccess: () => {
-                start(() => {
-                  setOpen(false)
-                  router.refresh()
-                })
-              },
-            }
-          )
+          trigger(data, {
+            onSuccess: () => {
+              start(() => {
+                setOpen(false)
+                router.refresh()
+              })
+            },
+          })
         )}
       >
         <div className="grid gap-4 py-4">
@@ -97,25 +97,32 @@ const Form = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
                 </Tooltip>
               </TooltipProvider>
             </Label>
-            <Input id="slug" {...register('slug', {
-              validate: async (value) => {
-                if (is.nonEmptyString(value)) {
-                  const res = await ky.get(`/api/v1/admin/slug/check?slug=${value}`).json<{ used: boolean }>()
-                  return !res.used
-                }
-                return true
-              }
-            })} />
-            {errors.slug?.type === 'validate' ? <p className="text-sm text-red-500"><span className="font-bold">Error:</span> The specified project slug is already in use</p> : null}
+            <Input
+              id="slug"
+              {...register('slug', {
+                validate: async (value) => {
+                  if (is.nonEmptyString(value)) {
+                    const res = await ky
+                      .get(`/api/v1/admin/slug/check?slug=${value}`)
+                      .json<{ used: boolean }>()
+                    return !res.used
+                  }
+                  return true
+                },
+              })}
+            />
+            {errors.slug?.type === 'validate' ? (
+              <p className="text-sm text-red-500">
+                <span className="font-bold">Error:</span> The specified project
+                slug is already in use
+              </p>
+            ) : null}
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="description" className="text-gray-600">
               Description
             </Label>
-            <Input
-              id="description"
-              {...register('description')}
-            />
+            <Input id="description" {...register('description')} />
           </div>
         </div>
         <DialogFooter>
