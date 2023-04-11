@@ -6,9 +6,9 @@ interface Props {
   params: {
     slug: string
   }
-  chidren: React.ReactNode
+  children?: React.ReactNode
 }
-const ProjectSlugLayout = async ({ params, chidren }: Props) => {
+const ProjectSlugLayout = async ({ params, children }: Props) => {
   const session = await getSession()
   const result = await findProjectBySlugOrId({
     userId: session.user.id,
@@ -22,7 +22,7 @@ const ProjectSlugLayout = async ({ params, chidren }: Props) => {
     <>
       <DashboardPageHeader title={result.project.name ?? 'Awesome Project'} description={result.project.description ?? session.user.email} >
       </DashboardPageHeader>
-      {chidren}
+      {children}
     </>
   )
 }
