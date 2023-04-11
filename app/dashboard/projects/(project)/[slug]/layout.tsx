@@ -2,12 +2,13 @@ import { getSession } from '~/service/auth/next-auth'
 import { findProjectBySlugOrId } from '~/service/project'
 import { notFound } from 'next/navigation'
 import { DashboardPageHeader } from '~/components/DashboardPageHeader'
-interface Params {
+interface Props {
   params: {
     slug: string
   }
+  chidren: React.ReactNode
 }
-const ProjectSlugPage = async ({ params }: Params) => {
+const ProjectSlugLayout = async ({ params, chidren }: Props) => {
   const session = await getSession()
   const result = await findProjectBySlugOrId({
     userId: session.user.id,
@@ -21,11 +22,9 @@ const ProjectSlugPage = async ({ params }: Params) => {
     <>
       <DashboardPageHeader title={result.project.name ?? 'Awesome Project'} description={result.project.description ?? session.user.email} >
       </DashboardPageHeader>
-      <div>token</div>
-      <div>member</div>
-      <div>storage</div>
+      {chidren}
     </>
   )
 }
 
-export default ProjectSlugPage
+export default ProjectSlugLayout

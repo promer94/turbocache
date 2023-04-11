@@ -34,7 +34,7 @@ export const findProjectsByUser = (query: { userId: string, slug?: string, page?
     userId: z.string(),
     slug: z.optional(z.string()),
     page: z.optional(z.string()).transform((v) => parseInt(v ? v : '1', 10)),
-    size: z.optional(z.string()).transform((v) => parseInt(v ? v : '2', 10)),
+    size: z.optional(z.string()).transform((v) => parseInt(v ? v : '10', 10)),
   }).parse(query)
   return prisma.$transaction(async (tx) => {
     const userProjects = await tx.permission.findMany({
