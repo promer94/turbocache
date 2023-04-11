@@ -15,8 +15,7 @@ const createValidator = z.object({
 
 const queryValidator = z.object({
   userId: z.string(),
-  projectId: z.string().optional(),
-  slug: z.string().optional(),
+  query: z.string(),
 })
 
 const editValidator = z.object({
@@ -59,14 +58,27 @@ export const findProjectsByUser = (query: {
     const permissionMap = new Map<string, 'ADMIN' | 'USER'>(
       userProjects.map((v) => [v.projectId, v.role])
     )
+    const OR = slug ? [{
+      slug: {
+        contains: slug,
+      }
+    }, {
+      name: {
+        contains: slug,
+      }
+    }, {
+      description: {
+        contains: slug,
+      }
+    }] : null
     const total = await tx.project.count({
       where: {
         id: {
           in: validId,
         },
-        slug: {
-          contains: slug,
-        },
+        ...OR && {
+          OR
+        }
       },
     })
     const projects = await tx.project.findMany({
@@ -76,9 +88,9 @@ export const findProjectsByUser = (query: {
         id: {
           in: validId,
         },
-        slug: {
-          contains: slug,
-        },
+        ...OR && {
+          OR
+        }
       },
     })
     return {
@@ -93,8 +105,7 @@ export const findProjectsByUser = (query: {
 
 export const findProjectBySlugOrId = (params: {
   userId?: string
-  projectId?: string
-  slug?: string
+  query?: string
 }) => {
   const result = queryValidator.parse(params)
   return prisma.permission.findFirst({
@@ -105,11 +116,11 @@ export const findProjectBySlugOrId = (params: {
       userId: result.userId,
       OR: [
         {
-          projectId: result.projectId,
+          projectId: result.query,
         },
         {
           project: {
-            slug: result.slug,
+            slug: result.query,
           },
         },
       ],

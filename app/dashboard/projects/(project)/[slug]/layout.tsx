@@ -12,8 +12,7 @@ const ProjectSlugLayout = async ({ params, children }: Props) => {
   const session = await getSession()
   const result = await findProjectBySlugOrId({
     userId: session.user.id,
-    slug: params.slug,
-    projectId: params.slug,
+    query: params.slug,
   })
   if (!result) {
     notFound()

@@ -9,7 +9,7 @@ const handler = defaultApiHandler()
     const projectId = z.string().parse(req.query.projectId)
     const data = await findProjectBySlugOrId({
       userId: session.user.id,
-      projectId,
+      query: projectId,
     })
     if (!data) {
       res.status(404).end('Not Found')
@@ -27,7 +27,7 @@ const handler = defaultApiHandler()
     const projectId = z.string().parse(req.query.projectId)
     const project = await findProjectBySlugOrId({
       userId: session.user.id,
-      projectId,
+      query: projectId,
     })
     if (project?.role !== 'ADMIN') {
       res.status(401).json({ success: false })
