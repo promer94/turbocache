@@ -148,7 +148,7 @@ export function NewProjectDialog() {
         <button
           className={cn(
             'flex w-[80px] items-center justify-center gap-1',
-            'rounded-md bg-green-200 text-green-500 hover:text-green-600',
+            'rounded-md bg-green-100 text-green-600 hover:text-green-800',
             'px-3 py-2',
             'focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2',
             'disabled:pointer-events-none disabled:opacity-5'

@@ -11,6 +11,7 @@ const linkClassName = `
   hover:bg-green-400 hover:text-white
   rounded-md
   space-x-2
+  focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2
 `
 const iconSize = 'h-4 w-4'
 export const DashboardNav = () => {

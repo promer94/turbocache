@@ -6,6 +6,7 @@ import { getSession } from '~/service/auth/next-auth'
 import { findProjectsByUser } from '~/service/project'
 import { View, UserCogIcon } from 'lucide-react'
 import Balancer from 'react-wrap-balancer'
+import { Pagenation } from './Pagenation'
 
 interface Props {
   searchParams: {
@@ -16,11 +17,12 @@ interface Props {
 }
 const ProjectsPage = async ({ searchParams }: Props) => {
   const session = await getSession()
+  const size = parseInt(searchParams.size ?? '12', 10)
   const result = await findProjectsByUser({
     userId: session.user.id,
     slug: searchParams.slug,
     page: searchParams.page,
-    size: searchParams.size,
+    size: size.toString(),
   })
   return (
     <section className="round-md flex flex-col gap-8">
@@ -34,7 +36,8 @@ const ProjectsPage = async ({ searchParams }: Props) => {
               'flex flex-col gap-8',
               'rounded-lg border border-gray-200',
               'shadow-md shadow-green-50 hover:shadow-lg hover:shadow-green-100',
-              'px-8 py-4'
+              'px-8 py-4',
+              'focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2'
             )}
           >
             <div className="flex justify-between gap-2">
@@ -53,6 +56,7 @@ const ProjectsPage = async ({ searchParams }: Props) => {
           </Link>
         ))}
       </div>
+      <Pagenation total={result.total} pageSize={size} pageParamName="page" sizeParamName='size'  ></Pagenation>
     </section>
   )
 }
