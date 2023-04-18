@@ -1,5 +1,6 @@
 import { DashboardPageHeader } from '~/components/DashboardPageHeader'
 import { getSession } from '~/service/auth/next-auth'
+import { findAuthUser } from '~/service/user'
 
 const DashboardLayout = async ({
   children,
@@ -7,11 +8,14 @@ const DashboardLayout = async ({
   children?: React.ReactNode
 }) => {
   const session = await getSession()
+  const user = await findAuthUser({
+    userId: session.user.id,
+  })
   return (
     <>
       <DashboardPageHeader
         title="Dashboard"
-        description={`Welcome, ${session.user.name} !`}
+        description={`Welcome, ${user.name} !`}
       />
       {children}
     </>

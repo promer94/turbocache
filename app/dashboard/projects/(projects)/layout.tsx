@@ -12,7 +12,7 @@ const ProjectLayout = async ({ children }: Props) => {
       <div className="flex justify-between">
         <div className="flex flex-1 flex-col gap-4">
           <div className="text-2xl font-semibold">Projects</div>
-          <Balancer className=" text-gray-500">
+          <Balancer className="text-gray-500">
             Create and search your awesome projects here
           </Balancer>
         </div>
