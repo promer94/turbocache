@@ -1,4 +1,4 @@
-import { DashboardPageHeader } from '~/components/dashboard-page-header'
+import DashboardPageHeader from '~/components/dashboard-page-header'
 
 const SettingLayout = async ({ children }: { children?: React.ReactNode }) => {
   return (
