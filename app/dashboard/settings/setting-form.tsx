@@ -81,5 +81,4 @@ const SettingForm = ({ initialName }: Props) => {
   )
 }
 
-
 export default SettingForm

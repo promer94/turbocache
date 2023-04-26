@@ -165,4 +165,3 @@ export default function NewProjectDialog() {
     </Dialog>
   )
 }
-

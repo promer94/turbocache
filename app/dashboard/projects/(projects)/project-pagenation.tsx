@@ -42,7 +42,7 @@ const Pagenation = ({
     [pageParamName]: (pageNum - 1).toString(),
     [sizeParamName]: sizeNum.toString(),
   }).toString()
-  if(total === 0) return null
+  if (total === 0) return null
   return (
     <div className="inline-flex items-center justify-center gap-3">
       <Link

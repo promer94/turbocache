@@ -56,5 +56,4 @@ const SearchProjects = () => {
   )
 }
 
-
 export default SearchProjects

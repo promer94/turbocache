@@ -1,6 +1,10 @@
 import React from 'react'
 import { getSession } from '~/service/auth/next-auth'
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/radix-avatar'
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '~/components/ui/radix-avatar'
 import Balancer from 'react-wrap-balancer'
 import SearchProjects from './search-projects'
 interface Props {
