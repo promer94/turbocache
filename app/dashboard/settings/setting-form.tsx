@@ -1,6 +1,6 @@
 'use client'
-import { Input } from '~/components/ui/Input'
-import { Label } from '~/components/ui/Label'
+import { Input } from '~/components/ui/radix-input'
+import { Label } from '~/components/ui/radix-label'
 import { cn } from '~/lib/utils'
 import { useForm } from 'react-hook-form'
 import useSWRMutation from 'swr/mutation'

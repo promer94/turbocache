@@ -4,7 +4,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '~/components/ui/Tooltip'
+} from '~/components/ui/radix-tooltip'
 import {
   Dialog,
   DialogContent,
@@ -13,9 +13,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '~/components/ui/Dialog'
-import { Input } from '~/components/ui/Input'
-import { Label } from '~/components/ui/Label'
+} from '~/components/ui/radix-dialog'
+import { Input } from '~/components/ui/radix-input'
+import { Label } from '~/components/ui/radix-label'
 import { cn } from '~/lib/utils'
 import { useState, useTransition } from 'react'
 import useSWRMutation from 'swr/mutation'

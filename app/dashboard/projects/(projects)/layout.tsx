@@ -1,6 +1,6 @@
 import React from 'react'
 import { getSession } from '~/service/auth/next-auth'
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/Avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/radix-avatar'
 import Balancer from 'react-wrap-balancer'
 interface Props {
   children: React.ReactNode

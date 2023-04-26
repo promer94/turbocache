@@ -4,7 +4,7 @@ import { cn } from '~/lib/utils'
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
-import { Input } from '~/components/ui/Input'
+import { Input } from '~/components/ui/radix-input'
 import { NewProjectDialog } from './NewProjectDialog'
 
 export const SearchProjects = () => {
