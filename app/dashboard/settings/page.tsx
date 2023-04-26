@@ -1,5 +1,5 @@
 import { getSession } from '~/service/auth/next-auth'
-import { SettingForm } from './SettingForm'
+import SettingForm from './setting-form'
 import { findAuthUser } from '~/service/user'
 
 const SettingsPage = async () => {

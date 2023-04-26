@@ -1,3 +1,3 @@
-import { DashboardLoading } from '~/components/DashboardContainer'
+import DashboardLoading from '~/components/dashboard-loading'
 
 export default DashboardLoading

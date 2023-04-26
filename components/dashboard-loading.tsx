@@ -13,3 +13,6 @@ export const DashboardLoading = ({
     </section>
   )
 }
+
+
+export default DashboardLoading

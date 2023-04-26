@@ -1,7 +1,7 @@
 import { getSession } from '~/service/auth/next-auth'
 import { findProjectBySlugOrId } from '~/service/project'
 import { notFound } from 'next/navigation'
-import { DashboardPageHeader } from '~/components/DashboardPageHeader'
+import DashboardPageHeader from '~/components/dashboard-page-header'
 interface Props {
   params: {
     slug: string

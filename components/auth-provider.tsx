@@ -12,4 +12,4 @@ const AuthProvider = ({
   return <SessionProvider session={session}>{children}</SessionProvider>
 }
 
-export { AuthProvider }
+export { AuthProvider as default }

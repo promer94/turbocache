@@ -1,4 +1,4 @@
-import { DashboardPageHeader } from '~/components/DashboardPageHeader'
+import DashboardPageHeader from '~/components/dashboard-page-header'
 import { getSession } from '~/service/auth/next-auth'
 import { findAuthUser } from '~/service/user'
 

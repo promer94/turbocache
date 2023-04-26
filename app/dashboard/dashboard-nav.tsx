@@ -14,7 +14,8 @@ const linkClassName = `
   focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2
 `
 const iconSize = 'h-4 w-4'
-export const DashboardNav = () => {
+
+const DashboardNav = () => {
   const segment = useSelectedLayoutSegment()
   return (
     <nav className={cn('flex flex-col gap-2')}>
@@ -39,3 +40,5 @@ export const DashboardNav = () => {
     </nav>
   )
 }
+
+export default DashboardNav

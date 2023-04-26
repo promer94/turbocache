@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { cn } from '~/lib/utils'
-import { DashboardNav } from '~/app/dashboard/DashboardNav'
-import { AuthProvider } from '~/components/AuthProvider'
+import DashboardNav from './dashboard-nav'
+import AuthProvider from '~/components/auth-provider'
 import { getSession } from '~/service/auth/next-auth'
 
 export default async function DashboardLayout({

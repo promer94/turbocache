@@ -17,7 +17,7 @@ interface Props {
   initialName: string
 }
 
-export const SettingForm = ({ initialName }: Props) => {
+const SettingForm = ({ initialName }: Props) => {
   const router = useRouter()
   const [_, start] = useTransition()
   const { register, handleSubmit } = useForm<FormState>({
@@ -80,3 +80,6 @@ export const SettingForm = ({ initialName }: Props) => {
     </form>
   )
 }
+
+
+export default SettingForm

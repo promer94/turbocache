@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import React from 'react'
-import { SearchProjects } from '~/app/dashboard/projects/(projects)/SearchProjects'
+import { SearchProjects } from './SearchProjects'
 import { cn } from '~/lib/utils'
 import { getSession } from '~/service/auth/next-auth'
 import { findProjectsByUser } from '~/service/project'
