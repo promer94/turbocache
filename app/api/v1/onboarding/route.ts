@@ -1,10 +1,10 @@
-import { defaultApiHandler } from '~/service/handler'
 import is from '@sindresorhus/is'
 import { getSession } from '~/service/auth/next-auth'
 import { createProject, findProjectsByUser } from '~/service/project'
+import { NextResponse } from 'next/server'
 
-const handler = defaultApiHandler().get(async (req, res) => {
-  const session = await getSession(req, res)
+const GET = async () => {
+  const session = await getSession()
   const result = await findProjectsByUser({
     userId: session.user.id,
   })
@@ -16,7 +16,9 @@ const handler = defaultApiHandler().get(async (req, res) => {
       description: 'Your awesome project !',
     })
   }
-  res.redirect(`/dashboard`)
-})
+  NextResponse.redirect(`/dashboard`)
+}
 
-export default handler
+export {
+  GET
+}

@@ -4,9 +4,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma =
   // @ts-ignore
   global.prisma ||
-  new PrismaClient({
-    log: ['query'],
-  })
+  new PrismaClient()
 // @ts-ignore
 if (process.env.NODE_ENV === 'development') global.prisma = prisma
 export default prisma as PrismaClient
