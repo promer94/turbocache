@@ -1,3 +1,4 @@
+'use client'
 import { PlusIcon, HelpCircleIcon, Loader2 } from 'lucide-react'
 import {
   Tooltip,
@@ -70,6 +71,7 @@ const Form = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
                 router.refresh()
               })
             },
+            throwOnError: true,
           })
         )}
       >
@@ -140,7 +142,7 @@ const Form = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
   )
 }
 
-export function NewProjectDialog() {
+export default function NewProjectDialog() {
   const [open, setOpen] = useState(false)
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -163,3 +165,4 @@ export function NewProjectDialog() {
     </Dialog>
   )
 }
+

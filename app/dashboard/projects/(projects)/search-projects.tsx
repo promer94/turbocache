@@ -5,9 +5,9 @@ import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 import { Input } from '~/components/ui/radix-input'
-import { NewProjectDialog } from './NewProjectDialog'
+import NewProjectDialog from './new-project-dialog'
 
-export const SearchProjects = () => {
+const SearchProjects = () => {
   const searchRef = React.useRef<HTMLInputElement>(null)
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -55,3 +55,6 @@ export const SearchProjects = () => {
     </form>
   )
 }
+
+
+export default SearchProjects

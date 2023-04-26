@@ -10,7 +10,7 @@ interface Props {
   pageSize: number
 }
 
-export const Pagenation = ({
+const Pagenation = ({
   total,
   pageParamName,
   sizeParamName,
@@ -42,6 +42,7 @@ export const Pagenation = ({
     [pageParamName]: (pageNum - 1).toString(),
     [sizeParamName]: sizeNum.toString(),
   }).toString()
+  if(total === 0) return null
   return (
     <div className="inline-flex items-center justify-center gap-3">
       <Link
@@ -74,3 +75,5 @@ export const Pagenation = ({
     </div>
   )
 }
+
+export default Pagenation

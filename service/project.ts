@@ -2,7 +2,7 @@ import prisma from '~/service/db/prisma'
 import * as z from 'zod'
 
 const createValidator = z.object({
-  name: z.string(),
+  name: z.string().trim().min(1),
   slug: z.optional(
     z.string().refine((v) => !v.includes('/'), {
       message: 'Slug cannot contain "/"',

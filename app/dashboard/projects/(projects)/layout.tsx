@@ -2,6 +2,7 @@ import React from 'react'
 import { getSession } from '~/service/auth/next-auth'
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/radix-avatar'
 import Balancer from 'react-wrap-balancer'
+import SearchProjects from './search-projects'
 interface Props {
   children: React.ReactNode
 }
@@ -30,7 +31,10 @@ const ProjectLayout = async ({ children }: Props) => {
           <div className="text-gray-600">{session.user.email}</div>
         </div>
       </div>
-      {children}
+      <section className="round-md flex flex-col gap-8">
+        <SearchProjects></SearchProjects>
+        {children}
+      </section>
     </>
   )
 }

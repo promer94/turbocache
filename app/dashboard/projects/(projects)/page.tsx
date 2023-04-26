@@ -1,11 +1,10 @@
 import Link from 'next/link'
-import { SearchProjects } from './SearchProjects'
 import { cn } from '~/lib/utils'
 import { getSession } from '~/service/auth/next-auth'
 import { findProjectsByUser } from '~/service/project'
 import { View, UserCogIcon } from 'lucide-react'
 import Balancer from 'react-wrap-balancer'
-import { Pagenation } from './Pagenation'
+import Pagenation from './project-pagenation'
 
 interface Props {
   searchParams: {
@@ -24,8 +23,7 @@ const ProjectsPage = async ({ searchParams }: Props) => {
     size: size.toString(),
   })
   return (
-    <section className="round-md flex flex-col gap-8">
-      <SearchProjects></SearchProjects>
+    <>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {result.projects.map((item) => (
           <Link
@@ -60,8 +58,8 @@ const ProjectsPage = async ({ searchParams }: Props) => {
         pageSize={size}
         pageParamName="page"
         sizeParamName="size"
-      ></Pagenation>
-    </section>
+      />
+    </>
   )
 }
 

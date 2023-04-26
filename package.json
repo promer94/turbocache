@@ -83,6 +83,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@perfsee/webpack": "^1.6.0",
     "@types/node": "18.16.1",
     "@types/react": "18.2.0",
     "autoprefixer": "10.4.14",
