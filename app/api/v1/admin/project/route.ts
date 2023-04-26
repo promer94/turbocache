@@ -26,7 +26,4 @@ const POST = async (req: NextRequest) => {
   return NextResponse.json({ success: true })
 }
 
-export {
-  GET,
-  POST
-}
+export { GET, POST }

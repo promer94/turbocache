@@ -56,7 +56,12 @@ const ProjectsPage = async ({ searchParams }: Props) => {
           </Link>
         ))}
       </div>
-      <Pagenation total={result.total} pageSize={size} pageParamName="page" sizeParamName='size'  ></Pagenation>
+      <Pagenation
+        total={result.total}
+        pageSize={size}
+        pageParamName="page"
+        sizeParamName="size"
+      ></Pagenation>
     </section>
   )
 }

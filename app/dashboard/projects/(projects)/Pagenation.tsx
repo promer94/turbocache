@@ -46,9 +46,12 @@ export const Pagenation = ({
     <div className="inline-flex items-center justify-center gap-3">
       <Link
         href={`/dashboard/projects?${prevPageParam}`}
-        className={cn("inline-flex h-8 w-8 items-center justify-center rounded-md bg-green-100 text-green-600 hover:text-green-800", {
-          'pointer-events-none bg-slate-50 text-slate-200': disablePrev
-        })}
+        className={cn(
+          'inline-flex h-8 w-8 items-center justify-center rounded-md bg-green-100 text-green-600 hover:text-green-800',
+          {
+            'pointer-events-none bg-slate-50 text-slate-200': disablePrev,
+          }
+        )}
       >
         <span className="sr-only">Next Page</span>
         <ChevronLeft></ChevronLeft>
@@ -60,12 +63,10 @@ export const Pagenation = ({
       </p>
       <Link
         href={`/dashboard/projects?${nextPageParam}`}
-        className={
-          cn(
-            "inline-flex h-8 w-8 items-center justify-center rounded-lg bg-green-100 text-green-600 hover:text-green-800", 
-            { 'pointer-events-none bg-slate-50 text-slate-200': disableNext }
-          )
-        }
+        className={cn(
+          'inline-flex h-8 w-8 items-center justify-center rounded-lg bg-green-100 text-green-600 hover:text-green-800',
+          { 'pointer-events-none bg-slate-50 text-slate-200': disableNext }
+        )}
       >
         <span className="sr-only">Next Page</span>
         <ChevronRight></ChevronRight>
@@ -73,4 +74,3 @@ export const Pagenation = ({
     </div>
   )
 }
-

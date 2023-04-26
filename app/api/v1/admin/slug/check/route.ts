@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const GET = async (req: NextRequest) => {
   const url = new URL(req.nextUrl)
-  const unsafeSlug = url.searchParams.get('slug') 
+  const unsafeSlug = url.searchParams.get('slug')
   const slug = z.string().safeParse(unsafeSlug)
   if (slug.success) {
     const result = await verifySlug(slug.data)
@@ -16,7 +16,4 @@ const GET = async (req: NextRequest) => {
   return new Response('Invalid slug', { status: 400 })
 }
 
-
-export {
-  GET
-}
+export { GET }

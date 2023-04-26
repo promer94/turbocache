@@ -1,10 +1,6 @@
 import prisma from '~/service/db/prisma'
 
-const findAuthUser = async ({
-  userId
-}: {
-  userId: string
-}) =>
+const findAuthUser = async ({ userId }: { userId: string }) =>
   prisma.user.findUniqueOrThrow({
     where: {
       id: userId,
@@ -13,7 +9,7 @@ const findAuthUser = async ({
 
 const changeUserName = async ({
   userId,
-  name
+  name,
 }: {
   userId: string
   name: string
@@ -30,4 +26,3 @@ const changeUserName = async ({
 }
 
 export { findAuthUser, changeUserName }
-

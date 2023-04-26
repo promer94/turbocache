@@ -27,7 +27,4 @@ const POST = async (req: NextRequest) => {
   return new Response('Unauthorized', { status: 401 })
 }
 
-export {
-  GET,
-  POST
-}
+export { GET, POST }

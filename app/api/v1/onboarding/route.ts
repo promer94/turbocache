@@ -19,6 +19,4 @@ const GET = async () => {
   NextResponse.redirect(`/dashboard`)
 }
 
-export {
-  GET
-}
+export { GET }

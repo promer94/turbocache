@@ -2,9 +2,14 @@ import { getSession } from '~/service/auth/next-auth'
 import { editProject, findProjectBySlugOrId } from '~/service/project'
 import { NextRequest, NextResponse } from 'next/server'
 
-const GET = async (_: NextRequest, { params }: {
-  params: { projectId: string }
-}) => {
+const GET = async (
+  _: NextRequest,
+  {
+    params,
+  }: {
+    params: { projectId: string }
+  }
+) => {
   const session = await getSession()
   const data = await findProjectBySlugOrId({
     userId: session.user.id,
@@ -21,10 +26,14 @@ const GET = async (_: NextRequest, { params }: {
   })
 }
 
-
-const POST = async (req: NextRequest, { params }: {
-  params: { projectId: string }
-}) => {
+const POST = async (
+  req: NextRequest,
+  {
+    params,
+  }: {
+    params: { projectId: string }
+  }
+) => {
   const session = await getSession()
   const project = await findProjectBySlugOrId({
     userId: session.user.id,
@@ -41,8 +50,4 @@ const POST = async (req: NextRequest, { params }: {
   return NextResponse.json({ success: true })
 }
 
-
-export {
-  GET,
-  POST
-}
+export { GET, POST }

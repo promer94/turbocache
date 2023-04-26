@@ -14,7 +14,12 @@ export default async function DashboardLayout({
     <main className={'px-6 py-2'}>
       <section className={cn('sticky top-0 h-0 w-[240px] flex-col')}>
         <header className={cn('flex items-center justify-between px-2 py-4')}>
-          <Link href="/dashboard" className={cn('text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2')}>
+          <Link
+            href="/dashboard"
+            className={cn(
+              'text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2'
+            )}
+          >
             Turbocache
           </Link>
         </header>
