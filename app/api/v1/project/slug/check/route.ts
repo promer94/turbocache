@@ -3,8 +3,7 @@ import { verifySlug } from '~/service/project'
 import { NextRequest, NextResponse } from 'next/server'
 
 const GET = async (req: NextRequest) => {
-  const url = new URL(req.nextUrl)
-  const unsafeSlug = url.searchParams.get('slug')
+  const unsafeSlug = req.nextUrl.searchParams.get('slug')
   const slug = z.string().safeParse(unsafeSlug)
   if (slug.success) {
     const result = await verifySlug(slug.data)

@@ -70,8 +70,7 @@ const Form = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
                 setOpen(false)
                 router.refresh()
               })
-            },
-            throwOnError: true,
+            }
           })
         )}
       >
@@ -105,7 +104,7 @@ const Form = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
                 validate: async (value) => {
                   if (is.nonEmptyString(value)) {
                     const res = await ky
-                      .get(`/api/v1/admin/slug/check?slug=${value}`)
+                      .get(`/api/v1/slug/check?slug=${value}`)
                       .json<{ used: boolean }>()
                     return !res.used
                   }
