@@ -20,25 +20,25 @@ const Pagenation = ({
   const pageNum = (() => {
     const num = searchParam?.get(pageParamName)
     if (num) {
-      return parseInt(num)
+      return parseInt(num, 10)
     }
     return 1
   })()
   const sizeNum = (() => {
     const size = searchParam?.get(sizeParamName)
     if (size) {
-      return parseInt(size)
+      return parseInt(size, 10)
     }
     return pageSize
   })()
   const totalPage = Math.ceil(total / sizeNum)
   const disablePrev = pageNum <= 1
   const disableNext = pageNum >= totalPage
-  const nextPageParam = new URLSearchParams({
+  const nextPageParam = disableNext? '' : new URLSearchParams({
     [pageParamName]: (pageNum + 1).toString(),
     [sizeParamName]: sizeNum.toString(),
   }).toString()
-  const prevPageParam = new URLSearchParams({
+  const prevPageParam = disablePrev ? '' : new URLSearchParams({
     [pageParamName]: (pageNum - 1).toString(),
     [sizeParamName]: sizeNum.toString(),
   }).toString()

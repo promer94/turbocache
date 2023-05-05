@@ -20,7 +20,7 @@ const ProjectsPage = async ({ searchParams }: Props) => {
     userId: session.user.id,
     slug: searchParams.slug,
     page: searchParams.page,
-    size: size.toString(),
+    size: size.toString(10),
   })
   return (
     <>

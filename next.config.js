@@ -14,8 +14,7 @@ const nextConfig = {
     domains: ['avatars.githubusercontent.com'],
   },
   experimental: {
-    typedRoutes: true,
-    appDir: true,
+    typedRoutes: true
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {
