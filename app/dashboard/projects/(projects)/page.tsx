@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { cn } from '~/lib/utils'
-import { getSession } from '~/service/auth/next-auth'
+import { getRSCSession } from '~/service/auth/next-auth'
 import { findProjectsByUser } from '~/service/project'
 import { View, UserCogIcon } from 'lucide-react'
 import Balancer from 'react-wrap-balancer'
@@ -14,7 +14,7 @@ interface Props {
   }
 }
 const ProjectsPage = async ({ searchParams }: Props) => {
-  const session = await getSession()
+  const session = await getRSCSession()
   const size = parseInt(searchParams.size ?? '12', 10)
   const result = await findProjectsByUser({
     userId: session.user.id,

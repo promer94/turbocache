@@ -2,14 +2,14 @@ import Link from 'next/link'
 import { cn } from '~/lib/utils'
 import DashboardNav from './dashboard-nav'
 import AuthProvider from '~/components/auth-provider'
-import { getSession } from '~/service/auth/next-auth'
+import { getRSCSession } from '~/service/auth/next-auth'
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const session = await getSession()
+  const session = await getRSCSession()
   return (
     <main className={'px-6 py-2'}>
       <section className={cn('sticky top-0 h-0 w-[240px] flex-col')}>
@@ -21,7 +21,7 @@ export default async function DashboardLayout({
             )}
           >
             Turbocache
-          </Link>
+            </Link>
         </header>
         <div>
           <DashboardNav></DashboardNav>

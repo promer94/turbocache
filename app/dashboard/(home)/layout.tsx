@@ -1,5 +1,5 @@
 import DashboardPageHeader from '~/components/dashboard-page-header'
-import { getSession } from '~/service/auth/next-auth'
+import { getRSCSession } from '~/service/auth/next-auth'
 import { findAuthUser } from '~/service/user'
 
 const DashboardLayout = async ({
@@ -7,7 +7,7 @@ const DashboardLayout = async ({
 }: {
   children?: React.ReactNode
 }) => {
-  const session = await getSession()
+  const session = await getRSCSession()
   const user = await findAuthUser({
     userId: session.user.id,
   })

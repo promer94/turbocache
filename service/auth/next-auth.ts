@@ -5,7 +5,7 @@ import prisma from '~/service/db/prisma'
 import * as z from 'zod'
 import { NextApiRequest, NextApiResponse } from 'next'
 import is from '@sindresorhus/is'
-
+import { cache } from 'react'
 interface TurboSession extends Session {
   user?: {
     name?: string | null
@@ -66,6 +66,8 @@ export const getSession = async (
   const result = SessionSchema.parse(session)
   return result
 }
+
+export const getRSCSession = cache(getSession)
 
 const NextAuthHandler = NextAuth(option)
 export default NextAuthHandler

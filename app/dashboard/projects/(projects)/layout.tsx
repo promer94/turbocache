@@ -1,5 +1,5 @@
 import React from 'react'
-import { getSession } from '~/service/auth/next-auth'
+import { getRSCSession } from '~/service/auth/next-auth'
 import {
   Avatar,
   AvatarFallback,
@@ -11,7 +11,7 @@ interface Props {
   children: React.ReactNode
 }
 const ProjectLayout = async ({ children }: Props) => {
-  const session = await getSession()
+  const session = await getRSCSession()
   return (
     <>
       <div className="flex justify-between">

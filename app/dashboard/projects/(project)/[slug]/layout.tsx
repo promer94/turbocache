@@ -1,4 +1,4 @@
-import { getSession } from '~/service/auth/next-auth'
+import { getRSCSession } from '~/service/auth/next-auth'
 import { findProjectBySlugOrId } from '~/service/project'
 import { notFound } from 'next/navigation'
 import DashboardPageHeader from '~/components/dashboard-page-header'
@@ -9,7 +9,7 @@ interface Props {
   children?: React.ReactNode
 }
 const ProjectSlugLayout = async ({ params, children }: Props) => {
-  const session = await getSession()
+  const session = await getRSCSession()
   const result = await findProjectBySlugOrId({
     userId: session.user.id,
     query: params.slug,

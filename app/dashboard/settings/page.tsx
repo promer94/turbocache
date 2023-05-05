@@ -1,9 +1,9 @@
-import { getSession } from '~/service/auth/next-auth'
+import { getRSCSession } from '~/service/auth/next-auth'
 import SettingForm from './setting-form'
 import { findAuthUser } from '~/service/user'
 
 const SettingsPage = async () => {
-  const session = await getSession()
+  const session = await getRSCSession()
   const user = await findAuthUser({
     userId: session.user.id,
   })
