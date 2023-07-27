@@ -6,6 +6,7 @@ import * as z from 'zod'
 import { NextApiRequest, NextApiResponse } from 'next'
 import is from '@sindresorhus/is'
 import { cache } from 'react'
+import { serverEnv } from '~/env/server-env'
 interface TurboSession extends Session {
   user?: {
     name?: string | null
@@ -31,14 +32,14 @@ const option = {
   },
   providers: [
     GithubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
+      clientId: serverEnv.GITHUB_ID,
+      clientSecret: serverEnv.GITHUB_SECRET,
     }),
   ],
   pages: {
     newUser: '/api/v1/onboarding',
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: serverEnv.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token, user }) {
       if (user) {

@@ -1,8 +1,10 @@
-const region = process.env.AWS_S3_REGION
-const keyId = process.env.AWS_ACCESSKEY_ID
-const key = process.env.AWS_ACCESSKEY_TOKEN
-const bucket = process.env.AWS_S3_BUCKET
-const endpoint = process.env.AWS_S3_ENDPOINT
+import { serverEnv } from '~/env/server-env'
+
+const region = serverEnv.AWS_S3_REGION
+const keyId = serverEnv.AWS_ACCESSKEY_ID
+const key = serverEnv.AWS_ACCESSKEY_TOKEN
+const bucket = serverEnv.AWS_S3_BUCKET
+const endpoint = serverEnv.AWS_S3_ENDPOINT
 
 export interface S3StorageOptions {
   region: string
