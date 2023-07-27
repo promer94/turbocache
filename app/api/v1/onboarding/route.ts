@@ -1,13 +1,8 @@
 import { getSession } from '~/service/auth/next-auth'
-import { findProjectsByUser } from '~/service/project'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse,  } from 'next/server'
 
-const GET = async () => {
-  const session = await getSession()
-  await findProjectsByUser({
-    userId: session.user.id,
-  })
-  NextResponse.redirect(`/dashboard`)
+const GET = async (request: NextRequest, ctx: any) => {
+  return NextResponse.redirect(new URL('/dashboard', request.url))
 }
 
 export { GET }
