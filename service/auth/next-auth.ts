@@ -70,5 +70,5 @@ export const getSession = async (
 
 export const getRSCSession = cache(getSession)
 
-const NextAuthHandler = NextAuth(option)
-export default NextAuthHandler
+const nextAuthHandler = NextAuth(option)
+export default nextAuthHandler
